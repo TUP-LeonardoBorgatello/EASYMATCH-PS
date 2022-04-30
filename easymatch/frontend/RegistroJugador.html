@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="StyleForRegister.css">
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <title>Formulario Registro</title>
+</head>
+
+
+<body>
+<header id="header" class="d-flex align-items-center">
+
+</header><!-- End Header -->
+
+<section class="form-register">
+    <h4>Formulario Registro</h4>
+    <input class="controls" type="text" name="nombre" id="nombre2" placeholder="Ingrese su Nombre">
+    <input class="controls" type="text" name="apellido" id="apellido2" placeholder="Ingrese su Apellido">
+    <input class="controls" type="text" name="domicilio" id="domicilio2" placeholder="Ingrese su Domicilio">
+    <input class="controls" type="text" name="email2" id="email2" placeholder="Ingrese su Email">
+    <input class="controls" type="text" name="documento" id="documento2" placeholder="Ingrese su Documento">
+    <select class="controls" name="cboTipoDocumento2" id="cboTipoDocumento2"></select>
+    <select class="controls" name="cboCiudad2" id="cboCiudad2"></select>
+    <input class="controls" type="password" name="contraseña" id="contraseñaJugador2" placeholder="Ingrese su contraseña">
+    <button type="button" id="save2" class="botons">Registrarse</button>
+    <p><a href="login.html">¿Ya tengo Cuenta?</a></p>
+</section>
+<!--
+<div class="container" style="margin-top: 20px;">
+    <h1 class="mt-5 mb-5 text-center">Jugadores</h1>
+    <div class="alert alert-primary" id="msg" style="display: none;" role="alert"></div>
+    <table id="jugadores" class="table table-bordered" style="width:100%">
+        <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>Domicilio</th>
+            <th>Documento</th>
+            <th>tipoDocumento</th>
+            <th>ciudad</th>
+            <th>email</th>
+            <th>contraseña</th>
+        </tr>
+        </thead>
+        <tfoot>
+        <tr>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>Domicilio</th>
+            <th>Documento</th>
+            <th>tipoDocumento</th>
+            <th>ciudad</th>
+            <th>estado</th>
+            <th>email</th>
+            <th>contraseña</th>
+        </tr>
+        </tfoot>
+    </table>
+
+    <div class="modal fade" id="clienteModal2" tabindex="-1" role="dialog" aria-labelledby="modalTitle"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalTitle">Agregar jugador</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="nombre2">Nombre</label>
+                            <input type="text" class="form-control" id="nombre2" placeholder="Ingrese su nombre">
+                            <input type="hidden" class="form-control" id="id">
+                        </div>
+                        <div class="form-group">
+                            <label for="apellido2">Apellido</label>
+                            <input type="text" class="form-control" id="apellido2"
+                                   placeholder="Ingrese su apellido">
+                        </div>
+                        <div class="form-group">
+                            <label for="domicilio2">Domicilio</label>
+                            <input type="text" class="form-control" id="domicilio2"
+                                   placeholder="Ingrese su domicilio">
+                        </div>
+                        <div class="form-group">
+                            <label for="documento2">Documento</label>
+                            <input type="text" class="form-control" id="documento2"
+                                   placeholder="Ingrese su documento">
+                        </div>
+                        <div class="form-group">
+                            <label for="id_tipo_doc2">Tipo de Documento</label>
+                            <select class="form-control" name="cboTipoDocumento2" id="cboTipoDocumento2"></select>
+                        </div>
+                        <div class="form-group">
+                            <label for="id_ciudad2">Ciudad</label>
+                            <select class="form-control" name="cboCiudad2" id="cboCiudad2"></select>
+                        </div>
+                        <div class="form-group">
+                            <label for="estado2">Estado</label>
+                            <select class="form-control" name="cboEstado2" id="cboEstado2">
+                                <option value="">SELECCIONE</option>
+                                <option value="1">Activo</option>
+                                <option value="2">Inactivo</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="email2">Email</label>
+                            <input type="text" class="form-control" id="email2" placeholder="Ingrese su email">
+                        </div>
+                        <div class="form-group">
+                            <label for="contraseñaJugador2">Contraseña</label>
+                            <input type="text" class="form-control" id="contraseñaJugador2"
+                                   placeholder="Ingrese su contraseña">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    <button type="button" id="save2" class="btn btn-primary">Guardar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>-->
+
+<script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous">
+</script>
+
+<script>
+    var app = {
+        backend: 'http://localhost:8080/api/easymatch',
+        table: null,
+        init: function () {
+           // app.initDatatable('#jugadores');
+
+            $("#save2").click(function () {
+                let combo = document.getElementById("cboTipoDocumento2");
+                let selected = combo.options[combo.selectedIndex].text;
+
+                if (selected === "DNI") {
+                    selected = 1
+                }
+                if (selected === "PASAPORTE") {
+                    selected = 2
+                }
+
+                let comboCiudad = document.getElementById("cboCiudad2");
+                let selectedCiudad = comboCiudad.options[comboCiudad.selectedIndex].text;
+
+                if (selectedCiudad === "Buenos Aires") {
+                    selectedCiudad = 1
+                }
+                if (selectedCiudad === "Santa Fe") {
+                    selectedCiudad = 2
+                }
+                if (selectedCiudad === "Mendoza") {
+                    selectedCiudad = 3
+                }
+                if (selectedCiudad === "Corrientes") {
+                    selectedCiudad = 4
+                }
+                if (selectedCiudad === "Santiago del Estero") {
+                    selectedCiudad = 5
+                }
+                if (selectedCiudad === "Misiones") {
+                    selectedCiudad = 6
+                }
+                if (selectedCiudad === "San Juan") {
+                    selectedCiudad = 7
+                }
+                if (selectedCiudad === "San Luis") {
+                    selectedCiudad = 8
+                }
+                if (selectedCiudad === "Formosa") {
+                    selectedCiudad = 9
+                }
+
+                /*let comboEstado = document.getElementById("cboEstado2");
+                let selectedEstado = comboEstado.options[comboEstado.selectedIndex].text;
+
+                if (selectedEstado === "Activo") {
+                    selectedEstado = 'true';
+                }
+                if (selectedEstado === "Inactivo") {
+                    selectedEstado = 'false';
+                }*/
+
+                app.save2({
+                    nombre: $('#nombre2').val(),
+                    apellido: $('#apellido2').val(),
+                    domicilio: $('#domicilio2').val(),
+                    documento: $('#documento2').val(),
+                    id_tipo_doc: selected,
+                    id_ciudad: selectedCiudad,
+                    //estado: selectedEstado,
+                    email: $('#email2').val(),
+                    contraseña: $('#contraseñaJugador2').val()
+                });
+            });
+        },
+        /*initDatatable: function (documento) {
+            app.table = $(documento).DataTable({
+                ajax: {
+                    url: app.backend + '/clientes',
+                    dataSrc: function (json) {
+                        return json;
+                    }
+                },
+                dom: 'Bfrtip',
+                columns: [
+                    {data: "nombre"},
+                    {data: "apellido"},
+                    {data: "domicilio"},
+                    {data: "documento"},
+                    {data: "tipoDocumento"},
+                    {data: "ciudad"},
+                    {data: "estado"},
+                    {data: "email"},
+                    {data: "contraseña"}
+                ],
+                buttons: [
+                    {
+                        text: 'Agregar',
+                        action: function (e, dt, node, config) {
+                            console.log(e);
+                            $('#clienteModal2').modal();
+                        }
+                    }
+                ]
+            });
+
+            $('#jugadores tbody').on('click', 'tr', function () {
+                if ($(this).hasClass('table-active')) {
+                    $(this).removeClass('table-active');
+                } else {
+                    app.table.$('tr.table-active').removeClass('table-active');
+                    $(this).addClass('table-active');
+                }
+            });
+        },
+
+         */
+
+        save2: function (data) {
+            $.ajax({
+                url: app.backend + '/add/jugador',
+                data: JSON.stringify(data),
+                method: 'POST',
+                dataType: 'json',
+                contentType: "application/json; charset=utf-8",
+                success: function (result) {
+                    if (result.status === "success") {
+                        swal({
+                            title: "Cliente agregado",
+                            text: "Cliente agregado con éxito",
+                            icon: "success",
+                        })
+                            .then((willDelete) => {
+                                location.reload();
+                            });
+                    }
+
+                },
+                error: function (e) {
+
+                    if (data.id_tipo_doc === "SELECCIONE") {
+                        swal("Advertencia", "Seleccione un tipo de documento", "info");
+                        return false;
+                    }
+                    if (data.id_ciudad === "SELECCIONE") {
+                        swal("Advertencia", "Seleccione una ciudad", "info");
+                        return false;
+                    }
+                    if (data.estado === "SELECCIONE") {
+                        swal("Advertencia", "Seleccione un estado", "info");
+                        return false;
+                    } else {
+                        swal("Error", "No se pudo agregar el cliente con ese documento o los valores ingresados no corresponden", "warning");
+                    }
+                }
+            })
+        }
+    };
+
+
+    $(document).ready(function () {
+        app.init();
+    });
+
+
+    $(document).ready(function () {
+        $.ajax({
+            url: "http://localhost:8080/api/easymatch/tiposdocumentos",
+            type: "GET",
+            success: function (result) {
+                cargarCombo2(result);
+            }
+        });
+    });
+
+    $(document).ready(function () {
+        $.ajax({
+            url: "http://localhost:8080/api/easymatch/ciudades",
+            type: "GET",
+            success: function (result) {
+                cargarComboCiudad2(result);
+            }
+        });
+    });
+
+    function cargarCombo2(datos) {
+        var html = "<option value=''>SELECCIONE</option>";
+        $("#cboTipoDocumento2").append(html);
+        select = document.getElementById("cboTipoDocumento2");
+        for (let i = 0; i < datos.length; i++) {
+            var option = document.createElement('option');
+            option.value = datos[i].id_tipo_doc;
+            option.text = datos[i].descripcion;
+            select.add(option);
+        }
+    }
+
+    function cargarComboCiudad2(datos) {
+        var html = "<option value=''>SELECCIONE</option>";
+        $("#cboCiudad2").append(html);
+        select = document.getElementById("cboCiudad2");
+        for (let i = 0; i < datos.length; i++) {
+            var option = document.createElement('option');
+            option.value = datos[i].id;
+            option.text = datos[i].descripcion;
+            select.add(option);
+        }
+    }
+
+</script>
+</body>
+
+</html>
