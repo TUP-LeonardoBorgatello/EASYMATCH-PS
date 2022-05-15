@@ -6,27 +6,20 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.time.LocalDate;
 
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "reservas")
-public class Reserva {
+@Table(name = "login_jugadores")
+public class LoginJugadores {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_reserva", length = 10)
-    private long idReserva;
-    @Column(nullable = false)
-    private LocalDate fecha;
+    @Column(name = "id_login_jugador", length = 10)
+    private long idLoginJugador;
 
-    @ManyToOne()
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "id_jugador", nullable = false)
     private Jugador jugador;
-
-    @ManyToOne()
-    @JoinColumn(name = "id_estado", nullable = false)
-    private Estado estado;
 }

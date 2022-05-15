@@ -53,10 +53,33 @@
 
 .form-register .botons {
     width: 100%;
-    background: #1f53c5;
     border: none;
     padding: 12px;
     color: white;
     margin: 16px 0;
     font-size: 16px;
+    background: #9df44b;
+    background: -webkit-linear-gradient(right, #049118, #6bff21, #21fd6e, #21ff25);
+    background: -o-linear-gradient(right, #049118, #6bff21, #21fd6e, #21ff25);
+    background: -moz-linear-gradient(right, #049118, #6bff21, #21fd6e, #21ff25);
+    background: linear-gradient(right, #049118, #6bff21, #21fd6e, #21ff25);
+
+}
+
+.botons {
+    width: 20%;
+    border: none;
+    padding: 10px;
+    color: white;
+    margin: 16px 0;
+    font-size: 16px;
+    background: #9df44b;
+    background: -webkit-linear-gradient(right, #049118, #6bff21, #21fd6e, #21ff25);
+    background: -o-linear-gradient(right, #049118, #6bff21, #21fd6e, #21ff25);
+    background: -moz-linear-gradient(right, #049118, #6bff21, #21fd6e, #21ff25);
+    background: linear-gradient(right, #049118, #6bff21, #21fd6e, #21ff25);
+}
+
+.outBotons {
+
 }

@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Repository
@@ -22,6 +23,12 @@ public interface JugadorRepository extends JpaRepository<Jugador, Long> {
     Jugador searchByDocumento1(@Param("documento") int documento);
 
     @Modifying
-    @Query(value = "UPDATE jugadores SET estado = FALSE WHERE id_jugador = :id_jugador", nativeQuery = true)
-    void updateJugadorStatus(@Param("id_jugador") long id_cliente);
+    @Transactional
+    @Query(value = "DELETE from jugadores WHERE documento = :documento", nativeQuery = true)
+    void deleteJugador(@Param("documento") int documento);
+
+    @Modifying
+    @Transactional
+    @Query(value = "DELETE from login_jugadores WHERE id_jugador = :id_jugador", nativeQuery = true)
+    void deleteJugadorLogin(@Param("id_jugador") long id_jugador);
 }

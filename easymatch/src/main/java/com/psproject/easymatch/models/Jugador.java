@@ -29,8 +29,6 @@ public class Jugador {
     @Column(length = 50, nullable = false)
     private String email;
     @Column(nullable = false)
-    private Boolean estado;
-    @Column(nullable = false)
     private String contraseña;
 
     @ManyToOne()

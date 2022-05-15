@@ -21,7 +21,7 @@ public class Negocio {
     @Column(length = 30, nullable = false)
     private String nombre;
     @Column(length = 30, nullable = false)
-    private String cuil;
+    private int cuil;
     @Column(length = 50, nullable = false)
     private String domicilio;
     @Column(length = 50, nullable = false)

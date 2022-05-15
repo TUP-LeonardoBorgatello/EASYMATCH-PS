@@ -21,8 +21,16 @@ public class DetalleReserva {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_detalle_reserva", length = 10)
     private long idDetalleReserva;
-    @Column(length = 50, nullable = false)
-    private LocalTime horario;
+    @Column(nullable = false)
+    private LocalDate fechaReserva;
+    @Column(nullable = false)
+    private int horarioInicial;
+    @Column(nullable = false)
+    private int horarioFinal;
+
+    @ManyToOne()
+    @JoinColumn(name = "id_cancha", nullable = false)
+    private Cancha cancha;
 
     @ManyToOne()
     @JoinColumn(name = "id_reserva", nullable = false)

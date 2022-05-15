@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="css/StyleForRegister.css">
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-    <title>Formulario Registro Jugador</title>
+    <title>Formulario Registro Negocio</title>
     <link rel="icon" type="image/png" href="images/EASY-MATCH2.png" />
 </head>
 
@@ -19,15 +19,13 @@
 
 <section class="form-register">
     <h4>Formulario Registro</h4>
-    <input class="controls" type="text" name="nombre" id="nombre2" placeholder="Ingrese su Nombre">
-    <input class="controls" type="text" name="apellido" id="apellido2" placeholder="Ingrese su Apellido">
-    <input class="controls" type="text" name="domicilio" id="domicilio2" placeholder="Ingrese su Domicilio">
-    <input class="controls" type="text" name="email2" id="email2" placeholder="Ingrese su Email">
-    <input class="controls" type="text" name="documento" id="documento2" placeholder="Ingrese su Documento">
-    <select class="controls" name="cboTipoDocumento2" id="cboTipoDocumento2"></select>
-    <select class="controls" name="cboCiudad2" id="cboCiudad2"></select>
-    <input class="controls" type="password" name="contraseña" id="contraseñaJugador2" placeholder="Ingrese su contraseña">
-    <button type="button" id="save2" class="botons">Registrarse</button>
+    <input class="controls" type="text" name="nombre" id="nombre" placeholder="Ingrese el Nombre">
+    <input class="controls" type="text" name="domicilio" id="domicilio" placeholder="Ingrese el Domicilio">
+    <input class="controls" type="text" name="email2" id="email" placeholder="Ingrese el Email">
+    <input class="controls" type="text" name="cuil" id="cuil" placeholder="Ingrese el CUIL-CUIT">
+    <select class="controls" name="cboCiudad2" id="cboCiudad"></select>
+    <input class="controls" type="password" name="contraseña" id="contraseñaNegocio" placeholder="Ingrese una contraseña">
+    <button type="button" id="save" class="botons">Registrarse</button>
     <p><a href="login.html">¿Ya tengo Cuenta?</a></p>
 </section>
 
@@ -45,20 +43,10 @@
         backend: 'http://localhost:8080/api/easymatch',
         table: null,
         init: function () {
-           // app.initDatatable('#jugadores');
 
-            $("#save2").click(function () {
-                let combo = document.getElementById("cboTipoDocumento2");
-                let selected = combo.options[combo.selectedIndex].text;
+            $("#save").click(function () {
 
-                if (selected === "DNI") {
-                    selected = 1
-                }
-                if (selected === "PASAPORTE") {
-                    selected = 2
-                }
-
-                let comboCiudad = document.getElementById("cboCiudad2");
+                let comboCiudad = document.getElementById("cboCiudad");
                 let selectedCiudad = comboCiudad.options[comboCiudad.selectedIndex].text;
 
                 if (selectedCiudad === "Buenos Aires") {
@@ -89,23 +77,20 @@
                     selectedCiudad = 9
                 }
 
-                app.save2({
-                    nombre: $('#nombre2').val(),
-                    apellido: $('#apellido2').val(),
-                    domicilio: $('#domicilio2').val(),
-                    documento: $('#documento2').val(),
-                    id_tipo_doc: selected,
+                app.save({
+                    nombre: $('#nombre').val(),
+                    domicilio: $('#domicilio').val(),
+                    cuil: $('#cuil').val(),
                     id_ciudad: selectedCiudad,
-                    //estado: selectedEstado,
-                    email: $('#email2').val(),
-                    contraseña: $('#contraseñaJugador2').val()
+                    email: $('#email').val(),
+                    contraseña: $('#contraseñaNegocio').val()
                 });
             });
         },
 
-        save2: function (data) {
+        save: function (data) {
             $.ajax({
-                url: app.backend + '/add/jugador',
+                url: app.backend + '/add/negocio',
                 data: JSON.stringify(data),
                 method: 'POST',
                 dataType: 'json',
@@ -113,8 +98,8 @@
                 success: function (result) {
                     if (result.status === "success") {
                         swal({
-                            title: "Jugador agregado",
-                            text: "Jugador agregado con éxito",
+                            title: "Negocio agregado",
+                            text: "Negocio agregado con éxito",
                             icon: "success",
                         })
                             .then((willDelete) => {
@@ -130,10 +115,6 @@
                 },
                 error: function (e) {
 
-                    if (data.id_tipo_doc === "SELECCIONE") {
-                        swal("Advertencia", "Seleccione un tipo de documento", "info");
-                        return false;
-                    }
                     if (data.id_ciudad === "SELECCIONE") {
                         swal("Advertencia", "Seleccione una ciudad", "info");
                         return false;
@@ -142,7 +123,7 @@
                         swal("Advertencia", "Seleccione un estado", "info");
                         return false;
                     } else {
-                        swal("Error", "No se pudo agregar el cliente con ese documento o los valores ingresados no corresponden", "warning");
+                        swal("Error", "No se pudo agregar el negocio con ese cuil o los valores ingresados no corresponden", "warning");
                     }
                 }
             })
@@ -157,40 +138,18 @@
 
     $(document).ready(function () {
         $.ajax({
-            url: "http://localhost:8080/api/easymatch/tiposdocumentos",
-            type: "GET",
-            success: function (result) {
-                cargarCombo2(result);
-            }
-        });
-    });
-
-    $(document).ready(function () {
-        $.ajax({
             url: "http://localhost:8080/api/easymatch/ciudades",
             type: "GET",
             success: function (result) {
-                cargarComboCiudad2(result);
+                cargarComboCiudad(result);
             }
         });
     });
 
-    function cargarCombo2(datos) {
+    function cargarComboCiudad(datos) {
         var html = "<option value=''>SELECCIONE</option>";
-        $("#cboTipoDocumento2").append(html);
-        select = document.getElementById("cboTipoDocumento2");
-        for (let i = 0; i < datos.length; i++) {
-            var option = document.createElement('option');
-            option.value = datos[i].id_tipo_doc;
-            option.text = datos[i].descripcion;
-            select.add(option);
-        }
-    }
-
-    function cargarComboCiudad2(datos) {
-        var html = "<option value=''>SELECCIONE</option>";
-        $("#cboCiudad2").append(html);
-        select = document.getElementById("cboCiudad2");
+        $("#cboCiudad").append(html);
+        select = document.getElementById("cboCiudad");
         for (let i = 0; i < datos.length; i++) {
             var option = document.createElement('option');
             option.value = datos[i].id;

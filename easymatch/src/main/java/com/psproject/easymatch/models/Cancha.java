@@ -20,6 +20,10 @@ public class Cancha {
     private long idCancha;
     @Column(length = 30, nullable = false)
     private String descripcion;
+    @Column(length = 30, nullable = false)
+    private double precioCancha;
+    @Column(nullable = false)
+    private boolean estado;
 
     @ManyToOne()
     @JoinColumn(name = "id_tipo_cancha", nullable = false)

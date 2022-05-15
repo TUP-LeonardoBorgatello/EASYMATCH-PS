@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!--===============================================================================================-->
-    <link rel="icon" type="image/png" href="images/favicon-32x32.png" />
+    <link rel="icon" type="image/png" href="images/EASY-MATCH2.png" />
     <!--===============================================================================================-->
     <link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
     <!--===============================================================================================-->
@@ -73,7 +73,7 @@
                 </div>
 
                 <div class="text-center p-t-20">
-                    <a class="txt2" href="RegistroJugador.html">
+                    <a class="txt2" href="RegistroNegocio.html">
                         Registrate como negocio y ofrecé tus servicios!
                     </a>
                 </div>
@@ -126,16 +126,16 @@
             "contraseña": password,
         };
         $.ajax({
-            url: "http://localhost:8080/api/easyventas/empleados/login",
+            url: "http://localhost:8080/api/easymatch/usuarios/login",
             type: "POST",
             dataType: "JSON",
             contentType: "application/json",
             data: JSON.stringify(comando),
 
             success: function (result) {
-                if (result.status === "success" && result.data === "Administrador logueado.") {
+                if (result.status === "success" && result.data === "Jugador logueado") {
                     swal({
-                        title: "Administrador logueado",
+                        title: "Jugador logueado",
                         text: "Bienvenido",
                         icon: "success",
                     })
@@ -145,12 +145,12 @@
                                     icon: "success",
                                 });
                             }
-                            window.location.href = "indexAdmin.html";
+                            window.location.href = "inicioReserva.html";
                         });
                 }
-                if (result.status === "success" && result.data === "Vendedor logueado.") {
+                if (result.status === "success" && result.data === "Negocio logueado") {
                     swal({
-                        title: "Vendedor logueado",
+                        title: "Negocio logueado",
                         text: "Bienvenido",
                         icon: "success",
                     })
@@ -165,7 +165,7 @@
                 }
             },
             error: function (e) {
-                swal("No se encontró el empleado con ese nombre de usuario o los valores ingresados no corresponden")
+                swal("No se encontró el usuario. Si no tenes cuenta registrate.")
             }
         })
     }
