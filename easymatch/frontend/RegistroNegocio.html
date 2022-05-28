@@ -23,7 +23,7 @@
     <input class="controls" type="text" name="domicilio" id="domicilio" placeholder="Ingrese el Domicilio">
     <input class="controls" type="text" name="email2" id="email" placeholder="Ingrese el Email">
     <input class="controls" type="text" name="cuil" id="cuil" placeholder="Ingrese el CUIL-CUIT">
-    <select class="controls" name="cboCiudad2" id="cboCiudad"></select>
+    <select class="controls" name="cboCiudad" id="cboCiudad"></select>
     <input class="controls" type="password" name="contraseña" id="contraseñaNegocio" placeholder="Ingrese una contraseña">
     <button type="button" id="save" class="botons">Registrarse</button>
     <p><a href="login.html">¿Ya tengo Cuenta?</a></p>
@@ -75,6 +75,9 @@
                 }
                 if (selectedCiudad === "Formosa") {
                     selectedCiudad = 9
+                }
+                if (selectedCiudad === "Cordoba") {
+                    selectedCiudad = 10
                 }
 
                 app.save({

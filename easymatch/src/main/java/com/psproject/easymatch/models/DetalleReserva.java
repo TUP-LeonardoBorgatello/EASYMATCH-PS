@@ -25,8 +25,6 @@ public class DetalleReserva {
     private LocalDate fechaReserva;
     @Column(nullable = false)
     private int horarioInicial;
-    @Column(nullable = false)
-    private int horarioFinal;
 
     @ManyToOne()
     @JoinColumn(name = "id_cancha", nullable = false)
@@ -35,4 +33,5 @@ public class DetalleReserva {
     @ManyToOne()
     @JoinColumn(name = "id_reserva", nullable = false)
     private Reserva reserva;
+
 }

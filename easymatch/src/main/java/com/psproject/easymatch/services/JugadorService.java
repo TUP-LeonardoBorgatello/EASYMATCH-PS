@@ -11,10 +11,10 @@ import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 @Service
 @Transactional
@@ -37,6 +37,12 @@ public class JugadorService implements iJugadorService {
 
     @Autowired
     LoginNegociosRepository loginNegociosRepository;
+
+    @Autowired
+    DetalleReservaRepository detalleReservaRepository;
+
+    @Autowired
+    CanchaRepository canchaRepository;
 
     @Override
     public List<JugadorResponseDTO> findAllJugadores() {
@@ -102,6 +108,7 @@ public class JugadorService implements iJugadorService {
 
     public boolean loginState(LoginRequestDTO loginRequestDTO) {
         boolean loginFlag;
+        ChangeStausForCanchas();
         Jugador jugador = jugadorRepository.searchByDocumento1(loginRequestDTO.getDocumentoLogin());
         Negocio negocio = negocioRepository.searchByCuil1(loginRequestDTO.getDocumentoLogin());
         if (jugador != null && jugador.getContraseña().equals(loginRequestDTO.getContraseña())) {
@@ -112,6 +119,20 @@ public class JugadorService implements iJugadorService {
             throw new EntityNotFoundException("No se encontro el usuario");
         }
         return loginFlag;
+    }
+
+    private void ChangeStausForCanchas() {
+        List<DetalleReserva> detalleReservas = detalleReservaRepository.findAll();
+        if (!detalleReservas.isEmpty()) {
+            detalleReservas.stream()
+                    .filter(detalleReserva -> detalleReserva.getFechaReserva()
+                            .isAfter(LocalDateTime.now().toLocalDate()))
+                    .forEach(id -> changeStatusCanchas(id.getCancha().getIdCancha()));
+        }
+    }
+
+    private void changeStatusCanchas(long canchaId) {
+        canchaRepository.updateEstadoToTrue(canchaId);
     }
 
     @Override
