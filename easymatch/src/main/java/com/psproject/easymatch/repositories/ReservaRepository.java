@@ -7,6 +7,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface ReservaRepository extends JpaRepository<Reserva, Long> {
 
@@ -14,7 +16,10 @@ public interface ReservaRepository extends JpaRepository<Reserva, Long> {
     Long lastReservaId();
 
     @Modifying
-    @Query(value = "UPDATE reservas SET id_estado = 3 where id_reserva = :id_reserva", nativeQuery = true)
+    @Query(value = "UPDATE reservas SET id_estado = 2 where id_reserva = :id_reserva", nativeQuery = true)
     void updateEstadoToFinalizado(@Param("id_reserva") long id_reserva);
+
+    @Query(value = "select * from reservas where id_jugador = :id_jugador", nativeQuery = true)
+    List<Reserva> findReservaByJugador(@Param("id_jugador") long id_jugador);
 
 }

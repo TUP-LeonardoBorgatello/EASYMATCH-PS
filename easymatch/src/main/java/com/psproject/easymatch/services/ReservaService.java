@@ -1,7 +1,9 @@
 package com.psproject.easymatch.services;
 
+import com.psproject.easymatch.dtos.DetalleReservaConsultaResponseDTO;
 import com.psproject.easymatch.dtos.DetalleReservaRequestDTO;
 import com.psproject.easymatch.dtos.DetalleReservaResponseDTO;
+import com.psproject.easymatch.dtos.TicketDecargaResponseDTO;
 import com.psproject.easymatch.models.*;
 import com.psproject.easymatch.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -71,7 +73,7 @@ public class ReservaService {
                             detalleReservaRequestDTO.getId_cancha(), detalleReservaRequestDTO.getHorario_inicial());
             if (detalleReservas.isEmpty()) {
                 Reserva r = reservaRepository.findById(lastReservaId).orElseThrow();
-                Estado e = estadoRepository.findById(2L).orElseThrow();
+                Estado e = estadoRepository.findById(1L).orElseThrow();
                 r.setEstado(e);
                 detalleReserva.setReserva(r);
                 detalleReserva.setFechaReserva(detalleReservaRequestDTO
@@ -118,8 +120,6 @@ public class ReservaService {
         ticket.setFormaPago(f);
 
         ticketRepository.save(ticket);
-        //TODO Continuar con el detalle del ticket. Falta hacer el metodo en el front para guardar el ticket, y luego la impresion del ticket.
-
     }
 
     public void addDetalleTicket() throws Exception {
@@ -139,5 +139,52 @@ public class ReservaService {
 
         detalleTicketRepository.save(detalleTicket);
         reservaRepository.updateEstadoToFinalizado(lastReservaId);
+    }
+
+    public TicketDecargaResponseDTO findDetalleTicket() {
+        Long lastIdTicket = ticketRepository.lastTicketId();
+        Ticket ticket = ticketRepository.findById(lastIdTicket).orElseThrow();
+        String fechaTicket = String.valueOf(ticket.getFecha());
+        String formaPago = ticket.getFormaPago().getDescripcion();
+        List<DetalleTicket> detalleTickets = detalleTicketRepository.findDetalleByTicketId(ticket.getIdTicket());
+        DetalleTicket d = detalleTickets.stream().findFirst().orElseThrow();
+
+        TicketDecargaResponseDTO ticketDecargaResponseDTO = new TicketDecargaResponseDTO();
+
+        ticketDecargaResponseDTO.setNumeroTicket(ticket.getIdTicket());
+        ticketDecargaResponseDTO.setFechaTicket(fechaTicket);
+        ticketDecargaResponseDTO.setMontoTicket(d.getMonto());
+        ticketDecargaResponseDTO.setApellidoJugador(d.getReserva().getJugador().getApellido());
+        ticketDecargaResponseDTO.setNombreJugador(d.getReserva().getJugador().getNombre());
+        ticketDecargaResponseDTO.setMailJugador(d.getReserva().getJugador().getEmail());
+        ticketDecargaResponseDTO.setFormaPago(formaPago);
+
+        return ticketDecargaResponseDTO;
+    }
+
+    public List<DetalleReservaConsultaResponseDTO> findDetalleReservaConsulta() {
+        Long lastIdJugadorLogued = jugadoresRepository.lastIdJugadorLogued();
+        LoginJugadores login = jugadoresRepository.findById(lastIdJugadorLogued).orElseThrow();
+        Jugador j = jugadorRepository.findById(login.getJugador().getIdJugador()).orElseThrow();
+        List<Reserva> reservas = reservaRepository.findReservaByJugador(j.getIdJugador());
+        List<DetalleReservaConsultaResponseDTO> detalleReservaConsultaResponseDTOS = new ArrayList<>();
+        for (Reserva r : reservas) {
+            DetalleReservaConsultaResponseDTO deDTO = new DetalleReservaConsultaResponseDTO();
+            List<DetalleReserva> detalleReservas = detalleReservaRepository.findDetalleByReservaId(r.getIdReserva());
+            if (!detalleReservas.isEmpty()) {
+                for (DetalleReserva de : detalleReservas) {
+                    deDTO.setIdReserva(r.getIdReserva());
+                    deDTO.setFechaHora(de.getFechaReserva() + " " + de.getHorarioInicial());
+                    deDTO.setFechaReserva(r.getFecha().toString());
+                    deDTO.setCancha(de.getCancha().getDescripcion());
+                    deDTO.setTipoCancha(de.getCancha().getTipoCancha().getDescripcion());
+                    deDTO.setDireccion(de.getCancha().getNegocio().getDomicilio());
+                    deDTO.setEstado(r.getEstado().getDescripcion());
+                    deDTO.setNegocio(de.getCancha().getNegocio().getNombre());
+                    detalleReservaConsultaResponseDTOS.add(deDTO);
+                }
+            }
+        }
+        return detalleReservaConsultaResponseDTOS;
     }
 }

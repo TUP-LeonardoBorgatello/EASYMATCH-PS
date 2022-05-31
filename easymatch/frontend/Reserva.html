@@ -36,7 +36,7 @@
 
         <nav id="navbar" class="navbar">
             <ul>
-                <li><a class="nav-link scrollto" href="login.html">Reservas</a></li>
+                <li><a class="nav-link scrollto" href="ConsultaReservas.html">Reservas</a></li>
                 <li><a class="nav-link scrollto" href="administraPerfilJugador.html">Administrar</a></li>
                 </li>
                 <li class="dropdown"><a href="#"><span><img src="images/user.png" class="ms-3 mx-auto">
@@ -65,8 +65,8 @@
             </p>
             <br><br>
             <input type="date" id="fechaReserva" name="trip-start"
-                   value="2022-05-20"
-                   min="2022-05-20" max="2022-07-30">
+                   value="2022-06-01"
+                   min="2022-06-01" max="2022-07-30">
             <br><br>
             <br><br>
             <br>
@@ -120,7 +120,7 @@
                 <div>
                     <p>Si ya terminaste tus reservas, haz click en "siguiente"</p>
                     <button type="button" id="botonSiguiente" class="siguienteButton" disabled="true"
-                            onclick="location.href = 'login.html'">Siguiente</button>
+                            onclick="location.href = 'Ticket.html'">Siguiente</button>
                 </div>
 
             </div>
@@ -179,6 +179,7 @@
                 console.log(idCancha);
                 console.log(selectedHorario);
                 console.log(fechaReserva);
+
 
                 app.save({
                     id_cancha: idCancha,

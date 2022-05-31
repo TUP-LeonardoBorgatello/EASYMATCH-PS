@@ -1,9 +1,6 @@
 package com.psproject.easymatch.controllers;
 
-import com.psproject.easymatch.dtos.DetalleReservaRequestDTO;
-import com.psproject.easymatch.dtos.DetalleReservaResponseDTO;
-import com.psproject.easymatch.dtos.JugadorRequestDTO;
-import com.psproject.easymatch.models.TipoDoc;
+import com.psproject.easymatch.dtos.*;
 import com.psproject.easymatch.services.ReservaService;
 import com.psproject.easymatch.services.ServiceResponse;
 import com.sun.istack.NotNull;
@@ -67,4 +64,31 @@ public class ReservaController {
         }
         return new ResponseEntity<Object>(response, HttpStatus.OK);
     }
+
+    @CrossOrigin(origins = "*")
+    @GetMapping("/ticket/descarga")
+    public TicketDecargaResponseDTO getTicket() throws Exception {
+        return reservaService.findDetalleTicket();
+    }
+
+    @CrossOrigin(origins = "*")
+    @GetMapping("/consulta/reservas")
+    public List<DetalleReservaConsultaResponseDTO> getDetalleReservaConsulta() throws Exception {
+        return reservaService.findDetalleReservaConsulta();
+    }
+
+/*    @CrossOrigin(origins = "*")
+    @GetMapping("/reserva/cancelada")
+    public ResponseEntity<?> cancelarReserva(@PathVariable long id_forma_pago) throws Exception {
+        ServiceResponse<?> response = new ServiceResponse<>("success", "Ticket agregado con éxito");
+        ServiceResponse<?> response2 = new ServiceResponse<>("error", "No se puedo agregar el ticket");
+        try {
+            reservaService.addTicket(id_forma_pago);
+            Thread.sleep(1000);
+            reservaService.addDetalleTicket();
+        } catch (Exception e) {
+            return new ResponseEntity<Object>(response2, HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<Object>(response, HttpStatus.OK);
+    }*/
 }

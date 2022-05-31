@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Consulta Reservas</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <!--    <link rel='stylesheet' type='text/css' media='screen' href='index.css'>-->
+    <link rel="icon" type="image/png" href="images/EASY-MATCH2.png"/>
+    <link rel="stylesheet" href="css/StyleForRegister.css">
+    <link rel='stylesheet' type='text/css' href='https://cdn.datatables.net/1.10.22/css/dataTables.bootstrap4.min.css'>
+    <link rel='stylesheet' type='text/css'
+          href='https://cdn.datatables.net/buttons/1.6.4/css/buttons.dataTables.min.css'>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+    <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+    <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+    <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+    <link href="assets/css/style.css" rel="stylesheet">
+
+</head>
+
+<body>
+<header id="header" class="d-flex align-items-center">
+    <div class="container d-flex align-items-center justify-content-between">
+
+        <div class="logo">
+            <a href="indexAdmin.html"><img
+                    src="images/EASY-MATCH2.png" alt=""
+                    class="img-fluid"></a>
+        </div>
+
+        <nav id="navbar" class="navbar">
+            <ul>
+                <li><a class="nav-link scrollto" href="inicioReserva.html">Volver</a></li>
+                <li><a class="nav-link scrollto" href="administraPerfilJugador.html">Administrar</a></li>
+                </li>
+                <li class="dropdown"><a href="#"><span><img src="images/user.png" class="ms-3 mx-auto">
+                                Jugador</span> <i class="bi bi-chevron-down"></i></a>
+                    <ul>
+                        <li><a href="login.html">Logout</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <i class="bi bi-list mobile-nav-toggle"></i>
+        </nav><!-- .navbar -->
+
+    </div>
+</header><!-- End Header -->
+
+<div class="container" style="margin-top: 20px;">
+    <h1 class="mt-5 mb-5 text-center">Historial de reservas</h1>
+    <p class="mt-5 mb-5 text-center">Tené en cuenta que si cancelás, deberás generar una nueva reserva desde el inicio por la demanda de solicitudes.</p>
+    <hr>
+    <hr>
+    <div class="alert alert-primary" id="msg" style="display: none;" role="alert"></div>
+    <table id="jugadores" class="table table-bordered" style="width:100%">
+        <thead>
+        <tr>
+            <th>Reserva</th>
+            <th>Cancha</th>
+            <th>Tipo de Cancha</th>
+            <th>Negocio</th>
+            <th>Fecha y hora de inicio</th>
+            <th>Dirección</th>
+            <th>Fecha de reserva</th>
+            <th>Estado</th>
+        </tr>
+        </thead>
+        <tfoot>
+        <tr>
+            <th>Reserva</th>
+            <th>Cancha</th>
+            <th>Tipo de Cancha</th>
+            <th>Negocio</th>
+            <th>Fecha y hora de inicio</th>
+            <th>Dirección</th>
+            <th>Fecha de reserva</th>
+            <th>Estado</th>
+        </tr>
+        </tfoot>
+    </table>
+    <hr>
+    <hr>
+    <div>
+        <p>Para una nueva reserva presioná el siguiente botón:</p>
+        <button type="button" id="btnNuevaReserva" class="siguienteButton"
+                onclick="location.href = 'inicioReserva.html'">Inicio</button>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>
+<script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.6.4/js/dataTables.buttons.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+
+
+<script>
+    var app = {
+        backend: 'http://localhost:8080/api/easymatch',
+        table: null,
+        init: function () {
+            app.initDatatable('#jugadores');
+        },
+        initDatatable: function (documento) {
+            app.table = $(documento).DataTable({
+                ajax: {
+                    url: app.backend + '/consulta/reservas',
+                    dataSrc: function (json) {
+                        return json;
+                    }
+                },
+                dom: 'Bfrtip',
+                columns: [
+                    {data: "idReserva"},
+                    {data: "cancha"},
+                    {data: "tipoCancha"},
+                    {data: "negocio"},
+                    {data: "fechaHora"},
+                    {data: "direccion"},
+                    {data: "fechaReserva"},
+                    {data: "estado"},
+                ],
+                buttons: [
+                    {
+                        text: 'Cancelar',
+                        action: function (e, dt, node, config) {
+                            console.log(e);
+                            var data = dt.rows('.table-active').data()[0];
+
+                            app.cancel({
+                                documento: data.idReserva,
+                            });
+
+                        }
+                    }
+                ]
+            });
+
+            $('#jugadores tbody').on('click', 'tr', function () {
+                if ($(this).hasClass('table-active')) {
+                    $(this).removeClass('table-active');
+                } else {
+                    app.table.$('tr.table-active').removeClass('table-active');
+                    $(this).addClass('table-active');
+                }
+            });
+        },
+        cancel: function (data) {
+            $.ajax({
+                url: app.backend + '/reserva/cancelada',
+                data: JSON.stringify(data),
+                method: 'POST',
+                dataType: 'json',
+                contentType: "application/json; charset=utf-8",
+                success: function (result) {
+                    if (result.status === "success") {
+                        swal({
+                            title: "Reserva cancelada",
+                            text: "Reserva cancelada con éxito, lamentamos tu desición!",
+                            icon: "success",
+                        })
+                            .then((willDelete) => {
+                                window.location.reload();
+                            });
+                    }
+                },
+                error: function (e) {
+                    swal("Error", "No se pudo cancelar la reserva", "warning");
+                }
+            })
+        }
+    };
+
+    $(document).ready(function () {
+        app.init();
+    });
+
+</script>
+</body>
+</html>

@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>DescargaTicket</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <!--    <link rel='stylesheet' type='text/css' media='screen' href='index.css'>-->
+    <link rel="icon" type="image/png" href="images/EASY-MATCH2.png"/>
+    <link rel="stylesheet" href="css/StyleForRegister.css">
+    <link rel='stylesheet' type='text/css' href='https://cdn.datatables.net/1.10.22/css/dataTables.bootstrap4.min.css'>
+    <link rel='stylesheet' type='text/css'
+          href='https://cdn.datatables.net/buttons/1.6.4/css/buttons.dataTables.min.css'>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"
+            integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+
+    <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+    <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+    <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+    <link href="assets/css/style.css" rel="stylesheet">
+</head>
+<body>
+<div class="container mt-5 border">
+    <br>
+    <div class="row">
+        <div class="col-3">
+            <span class="h4">EasyMatch</span><img src="images/EASY-MATCH2.png" class="ms-3"
+                                                  style="width: 30%">
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col-4 border-end">
+                <span id="numeroTicket" class="h4">Nro Ticket: </span><span class="h4"></span><br><br>
+                <span id="nombreJugador" class="h4">Nombre: </span><span class="h4"></span><br><br>
+                <span id="apellidoJugador" class="h4">Apellido: </span><span class="h4"></span> <br><br>
+                <span id="mailJugador" class="h4">Mail: </span><span class="h4"></span>
+            </div>
+
+            <div class="col-4 border-end">
+                <h4 class="mb-4">Fecha:</h4>
+                <h5 id="fechaTicket" class="mb-4"></h5>
+            </div>
+            <div class="col-4">
+                <h4 class="mb-4">Datos del tipo de pago:</h4>
+                <h5 id="formaPagoTicket" class="mb-4"></h5>
+            </div>
+        </div>
+        <hr>
+        <hr>
+        <div class="col-3">
+            <h4 class="mb-4">Detalle de las reservas:</h4>
+        </div>
+        <hr>
+        <table class="table  text-center mb-4">
+            <thead>
+            <tr>
+                <th scope="col">Cancha</th>
+                <th scope="col">Tipo de cancha</th>
+                <th scope="col">Nombre del Negocio</th>
+                <th scope="col">Fecha y hora</th>
+                <th scope="col">Dirección</th>
+            </tr>
+            </thead>
+            <tbody id="detalleReserva">
+            </tbody>
+        </table>
+        <hr>
+        <div class="col-3 border-end">
+            <h4 class="mb-4" id="montoTicket">Monto total: </h4>
+            <h5 class="mb-4"></h5>
+        </div>
+        <div class="col-3">
+            <h4 class="mb-4"></h4>
+        </div>
+        <div class="col-3">
+            <h4 class="mb-4"></h4>
+        </div>
+        <div class="col-3 border-end">
+            <h6 class="mb-4">Muchas gracias por confiar en nosotros.</h6>
+        </div>
+        <hr>
+    </div>
+</div>
+<div class="container text-center mt-5">
+    <div class="row">
+        <div class="col-xl-12 mt-4 botones">
+            <p>Descargá tu ticket:</p>
+            <button onclick="HTMLtoPDF()" type="button" id="confirmar"
+                    class="siguienteButton" href="">Descargar
+            </button>
+        </div>
+    </div>
+
+</div>
+</body>
+
+<script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>
+<script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.6.4/js/dataTables.buttons.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+
+<script>
+    function HTMLtoPDF() {
+        const $elementoAConvertir = document.body;
+        html2pdf()
+            .set({
+                margin: 1,
+                filename: 'documento.pdf',
+                image: {
+                    type: 'jpeg',
+                    quality: 0.98
+                },
+                html2canvas: {
+                    scale: 3,
+                    letterRendering: true,
+                },
+                jsPDF: {
+                    unit: "in",
+                    format: "a2",
+                    orientation: 'portrait'
+                },
+            })
+            .from($elementoAConvertir)
+            .save()
+            .catch(err => console.log(err))
+            .then((willDelete) => {
+                location.href = "inicioReserva.html";
+            });
+    }
+
+    $(document).ready(function () {
+        $.ajax({
+            url: "http://localhost:8080/api/easymatch/cargartablaticket",
+            type: "GET",
+            success: function (datos) {
+                for (var i = 0; i < datos.length; i++) {
+                    var html = "<tr>";
+                    html += "<td>" + datos[i].cancha + "</td>";
+                    html += "<td>" + datos[i].tipoCancha + "</td>";
+                    html += "<td>" + datos[i].negocio + "</td>";
+                    html += "<td>" + datos[i].fechaHora + "</td>";
+                    html += "<td>" + datos[i].direccion + "</td>";
+                    html += "</tr>";
+                    $("#detalleReserva").append(html);
+                }
+            }
+        });
+
+        $.ajax({
+            url: "http://localhost:8080/api/easymatch/ticket/descarga",
+            type: "GET",
+            success: function (datos) {
+                var html = "<span>";
+                var html2 = "<span>";
+                var html3 = "<span>";
+                var html4 = "<span>";
+                var html5 = "<span>";
+                var html6 = "<span>";
+                var html7 = "<span>";
+
+                html += "<span>" + datos.numeroTicket + "</span>";
+                html2 += "<span>" + datos.nombreJugador + "</span>";
+                html3 += "<span>" + datos.apellidoJugador + "</span>";
+                html4 += "<span>" + datos.mailJugador + "</span>";
+                html5 += "<span>" + datos.fechaTicket + "</span>";
+                html6 += "<span>" + datos.formaPago + "</span>";
+                html7 += "<span>" + "$" + datos.montoTicket + "</span>";
+
+                $("#numeroTicket").append(html);
+                $("#nombreJugador").append(html2);
+                $("#apellidoJugador").append(html3);
+                $("#mailJugador").append(html4);
+                $("#fechaTicket").append(html5);
+                $("#formaPagoTicket").append(html6);
+                $("#montoTicket").append(html7);
+            }
+
+        });
+    });
+
+</script>
+
+</html>

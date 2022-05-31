@@ -112,29 +112,20 @@
                 </div>
 
             </div>
-    </div>
-    <div class="container text-center mt-5">
-        <div class="row">
-            <div class="col-xl-12 mt-4 botones">
-                <p>Confirmá tu reservá para poder imprimir el ticket</p>
-                <button type="button" id="confirmar"
-                        class="siguienteButton">Confirmar
-                </button>
-            </div>
-            <div>
-                <br>
-                <br>
-                <p>Haz click en el siguiente botón para imprimir tu ticket y presentalo en la cancha.</p>
-                <a href="#principio">
-                    <button id="descargar" disabled="true" type="button" class="siguienteButton">Descargar
-                    </button>
-                </a>
-            </div>
-        </div>
 
+            <div class="container text-center mt-5">
+                <div class="row">
+                    <div class="col-xl-12 mt-4 botones">
+                        <p>Confirmá tu reservá para poder imprimir el ticket</p>
+                        <button type="button" id="confirmar"
+                                class="siguienteButton">Confirmar
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </section>
     </div>
-    </section>
-</div>
 </div>
 
 <script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>
@@ -184,9 +175,8 @@
                                 icon: "success",
                             })
                                 .then((willDelete) => {
-                                    $('#descargar').prop('disabled', false);
-                                    $('#confirmar').prop('disabled', true);
 
+                                    window.location.href = "TicketDescarga.html";
                                     //location.reload();
                                 });
 
@@ -230,7 +220,6 @@
 
     $(document).ready(function () {
         app.init();
-        app.init2();
         $.ajax({
             url: "http://localhost:8080/api/easymatch/metodopago",
             type: "GET",
