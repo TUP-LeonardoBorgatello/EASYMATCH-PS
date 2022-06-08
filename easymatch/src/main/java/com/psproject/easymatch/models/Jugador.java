@@ -30,6 +30,8 @@ public class Jugador {
     private String email;
     @Column(nullable = false)
     private String contraseña;
+    @Column(nullable = false)
+    private Boolean estado;
 
     @ManyToOne()
     @JoinColumn(name = "id_ciudad", nullable = false)

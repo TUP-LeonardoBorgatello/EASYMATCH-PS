@@ -1,9 +1,6 @@
 package com.psproject.easymatch.services;
 
-import com.psproject.easymatch.dtos.DetalleReservaConsultaResponseDTO;
-import com.psproject.easymatch.dtos.DetalleReservaRequestDTO;
-import com.psproject.easymatch.dtos.DetalleReservaResponseDTO;
-import com.psproject.easymatch.dtos.TicketDecargaResponseDTO;
+import com.psproject.easymatch.dtos.*;
 import com.psproject.easymatch.models.*;
 import com.psproject.easymatch.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -169,6 +166,10 @@ public class ReservaService {
         List<Reserva> reservas = reservaRepository.findReservaByJugador(j.getIdJugador());
         List<DetalleReservaConsultaResponseDTO> detalleReservaConsultaResponseDTOS = new ArrayList<>();
         for (Reserva r : reservas) {
+            //El siguiente if es para validar que la fecha sea antes que hoy, entonces cambia el estado de la reserva a Cancelada.
+            if (r.getFecha().isBefore(LocalDate.now())){
+                reservaRepository.updateEstadoToCancelado(r.getIdReserva());
+            }
             DetalleReservaConsultaResponseDTO deDTO = new DetalleReservaConsultaResponseDTO();
             List<DetalleReserva> detalleReservas = detalleReservaRepository.findDetalleByReservaId(r.getIdReserva());
             if (!detalleReservas.isEmpty()) {
@@ -186,5 +187,18 @@ public class ReservaService {
             }
         }
         return detalleReservaConsultaResponseDTOS;
+    }
+
+    public void deleteReserva(ReservaDeleteRequestDTO reservaDelete) throws Exception {
+
+        List<DetalleReserva> detalleReservas = detalleReservaRepository.findDetalleByReservaId(reservaDelete.getIdReserva());
+        Reserva reserva = reservaRepository.findById(reservaDelete.getIdReserva()).orElseThrow();
+        if (detalleReservas.isEmpty()) {
+            reservaRepository.deleteById(reservaDelete.getIdReserva());
+        } else if (reserva.getEstado().getIdEstado() == 2) {
+            reservaRepository.updateEstadoToCancelado(reservaDelete.getIdReserva());
+        } else {
+            throw new Exception("La reserva está finalizada o cancelada");
+        }
     }
 }

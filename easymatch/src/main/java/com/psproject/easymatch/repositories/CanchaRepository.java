@@ -24,4 +24,7 @@ public interface CanchaRepository extends JpaRepository<Cancha, Long> {
     @Query(value = "select * from canchas where id_cancha = :id_cancha LIMIT 1", nativeQuery = true)
     Cancha searchById(@Param("id_cancha") long id_cancha);
 
+    @Query(value = "select * from canchas where id_negocio = :id_negocio", nativeQuery = true)
+    List<Cancha> findCanchasByNegocioId(@Param("id_negocio") long id_negocio);
+
 }

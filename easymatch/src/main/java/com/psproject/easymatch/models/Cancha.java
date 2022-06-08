@@ -23,7 +23,7 @@ public class Cancha {
     @Column(length = 30, nullable = false)
     private double precioCancha;
     @Column(nullable = false)
-    private boolean estado;
+    private Boolean estado;
 
     @ManyToOne()
     @JoinColumn(name = "id_tipo_cancha", nullable = false)

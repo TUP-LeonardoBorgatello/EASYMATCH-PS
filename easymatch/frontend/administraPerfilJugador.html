@@ -62,8 +62,8 @@
       <th>Apellido</th>
       <th>Domicilio</th>
       <th>Documento</th>
-      <th>ciudad</th>
-      <th>email</th>
+      <th>Ciudad</th>
+      <th>Email</th>
     </tr>
     </thead>
     <tfoot>
@@ -72,8 +72,8 @@
       <th>Apellido</th>
       <th>Domicilio</th>
       <th>Documento</th>
-      <th>ciudad</th>
-      <th>email</th>
+      <th>Ciudad</th>
+      <th>Email</th>
     </tr>
     </tfoot>
   </table>
@@ -340,7 +340,7 @@
         ],
         buttons: [
           {
-            text: 'Editar',
+            text: '<button class="btn btn-success">Editar</button>',
             action: function (e, dt, node, config) {
               console.log(e);
               var data = dt.rows('.table-active').data()[0];
@@ -349,7 +349,7 @@
             }
           },
           {
-            text: 'Eliminar',
+            text: '<button class="btn btn-danger">Desactivar</button>',
             action: function (e, dt, node, config) {
               console.log(e);
               var data = dt.rows('.table-active').data()[0];

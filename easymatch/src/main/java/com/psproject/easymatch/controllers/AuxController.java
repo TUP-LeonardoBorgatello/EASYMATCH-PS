@@ -2,6 +2,7 @@ package com.psproject.easymatch.controllers;
 
 import com.psproject.easymatch.models.Ciudad;
 import com.psproject.easymatch.models.FormaPago;
+import com.psproject.easymatch.models.TipoCancha;
 import com.psproject.easymatch.models.TipoDoc;
 import com.psproject.easymatch.services.AuxService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,5 +36,11 @@ public class AuxController {
     @GetMapping("/metodopago")
     public List<FormaPago> getAllMetodoPago() {
         return auxService.findAllMetodoPago();
+    }
+
+    @CrossOrigin(origins = "*")
+    @GetMapping("/tipocancha")
+    public List<TipoCancha> getAllTipoCanchas() {
+        return auxService.findAllTipoCanchas();
     }
 }

@@ -77,18 +77,16 @@ public class ReservaController {
         return reservaService.findDetalleReservaConsulta();
     }
 
-/*    @CrossOrigin(origins = "*")
-    @GetMapping("/reserva/cancelada")
-    public ResponseEntity<?> cancelarReserva(@PathVariable long id_forma_pago) throws Exception {
-        ServiceResponse<?> response = new ServiceResponse<>("success", "Ticket agregado con éxito");
-        ServiceResponse<?> response2 = new ServiceResponse<>("error", "No se puedo agregar el ticket");
+    @CrossOrigin(origins = "*")
+    @PostMapping("/reserva/cancelada")
+    public ResponseEntity<?> cancelarReserva(@RequestBody ReservaDeleteRequestDTO reservaDeleteRequest) throws Exception {
+        ServiceResponse<?> response = new ServiceResponse<>("success", "Reserva cancelada.");
+        ServiceResponse<?> response2 = new ServiceResponse<>("error", "No se puedo cancelar la reserva.");
         try {
-            reservaService.addTicket(id_forma_pago);
-            Thread.sleep(1000);
-            reservaService.addDetalleTicket();
+            reservaService.deleteReserva(reservaDeleteRequest);
         } catch (Exception e) {
             return new ResponseEntity<Object>(response2, HttpStatus.BAD_REQUEST);
         }
         return new ResponseEntity<Object>(response, HttpStatus.OK);
-    }*/
+    }
 }

@@ -4,7 +4,7 @@
 <head>
     <meta charset='utf-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <title>Inicio Reserva</title>
+    <title>Menu Negocio</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <!--    <link rel='stylesheet' type='text/css' media='screen' href='index.css'>-->
     <link rel="icon" type="image/png" href="images/EASY-MATCH2.png"/>
@@ -34,11 +34,10 @@
 
         <nav id="navbar" class="navbar">
             <ul>
-                <li><a class="nav-link scrollto" href="ConsultaReservas.html">Reservas</a></li>
-                <li><a class="nav-link scrollto" href="administraPerfilJugador.html">Administrar</a></li>
+                <li><a class="nav-link scrollto" href="administraPerfilNegocio.html">Administrar</a></li>
                 </li>
                 <li class="dropdown"><a href="#"><span><img src="images/user.png" class="ms-3 mx-auto">
-                                Jugador</span> <i class="bi bi-chevron-down"></i></a>
+                                Negocio</span> <i class="bi bi-chevron-down"></i></a>
                     <ul>
                         <li><a href="login.html">Logout</a></li>
                     </ul>
@@ -58,16 +57,29 @@
                 ¡Muchas gracias por confiar en nosotros!
             </h2>
             <p>
-                Ahora podrás hacer uso de la mejor plataforma para reservar canchas y divertirte con amigos.
-                Si deseas reserva ahora, inicia el proceso haciendo click en el siguiente botón:
+                Ahora pordrás administrar tus canchas a través de nuestra plataforma de manera eficiente.
+                En los siguientes botones podrás acceder a diferentes secciones que te serán de utilidad para
+                administrar tu negocio:
             </p>
-            <a>
-                <button type="button" id="save" class="botonsInicioReserva">Iniciar Reserva</button>
-            </a>
+            <div>
+                <a>
+                    <button type="button" id="btnCanchas" class="botonsInicioReserva" onclick="location.href = 'administrarCanchas.html'">Canchas</button>
+                </a>
+            </div>
+            <div>
+                <a>
+                    <button type="button" id="btnReservas" class="botonsInicioReserva">Reservas</button>
+                </a>
+            </div>
+            <div>
+                <a>
+                    <button type="button" id="btnReportes" class="botonsInicioReserva">Reportes</button>
+                </a>
+            </div>
         </div>
 
         <div class="col-md-6">
-            <img SRC="images/pelotaFutbol.jpg" class="img-fluid d-sm-block"
+            <img SRC="images/Cancha-de-fútbol-11.jpg" class="img-fluid d-sm-block"
                  style="width: 100%; opacity: 80%">
         </div>
     </div>
@@ -80,36 +92,3 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
-
-
-<script>
-    $("#save").click(function () {
-        $(document).ready(function () {
-            $.ajax({
-                url: "http://localhost:8080/api/easymatch/add/reserva",
-                type: "GET",
-                success: function (result) {
-                    if (result.status === "success") {
-                        swal({
-                            title: "Reserva agregada",
-                            text: "Inicio de reserva.",
-                            icon: "success",
-                        })
-                            .then((willDelete) => {
-                                if (willDelete) {
-                                    swal("Redirigiendo a login", {
-                                        icon: "success",
-                                    });
-                                }
-                                window.location.href = "Reserva.html";
-                            });
-                    }
-                },
-                error: function (e) {
-                    swal("No se pudo avanzar con la reserva. Reloguea tu usuario por favor.")
-                }
-
-            });
-        });
-    });
-</script>

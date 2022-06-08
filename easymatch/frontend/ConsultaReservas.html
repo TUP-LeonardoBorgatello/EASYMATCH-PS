@@ -54,7 +54,8 @@
 
 <div class="container" style="margin-top: 20px;">
     <h1 class="mt-5 mb-5 text-center">Historial de reservas</h1>
-    <p class="mt-5 mb-5 text-center">Tené en cuenta que si cancelás, deberás generar una nueva reserva desde el inicio por la demanda de solicitudes.</p>
+    <p class="mt-5 mb-5 text-center">Tené en cuenta que si cancelás, deberás generar una nueva reserva desde el inicio.</p>
+    <p class="mt-7 mb-5 text-center">Solo podrás cancelar reservas confirmadas en el día.</p>
     <hr>
     <hr>
     <div class="alert alert-primary" id="msg" style="display: none;" role="alert"></div>
@@ -137,9 +138,10 @@
                         action: function (e, dt, node, config) {
                             console.log(e);
                             var data = dt.rows('.table-active').data()[0];
+                            console.log(data.idReserva);
 
                             app.cancel({
-                                documento: data.idReserva,
+                                idReserva: data.idReserva,
                             });
 
                         }

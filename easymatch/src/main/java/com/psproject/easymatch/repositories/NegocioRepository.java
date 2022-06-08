@@ -24,5 +24,11 @@ public interface NegocioRepository extends JpaRepository<Negocio, Long> {
 
     @Modifying
     @Query(value = "UPDATE negocios SET estado = FALSE WHERE id_negocio = :id_negocio", nativeQuery = true)
-    void updateNegocioStatus(@Param("id_negocio") long id_negocio);
+    void updateNegocioToFalse(@Param("id_negocio") long id_negocio);
+
+    @Modifying
+    @Query(value = "UPDATE negocios SET estado = TRUE WHERE id_negocio = :id_negocio", nativeQuery = true)
+    void updateNegocioToTrue(@Param("id_negocio") long id_negocio);
+
+
 }

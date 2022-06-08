@@ -64,28 +64,29 @@ public class JugadorService implements iJugadorService {
 
     @Override
     public void addJugador(JugadorRequestDTO jugadorRequestDTO) throws Exception {
-
-        if (jugadorRepository.existsByDocumento(jugadorRequestDTO.getDocumento())) {
+        Jugador jugador = jugadorRepository.searchByDocumento1(jugadorRequestDTO.getDocumento());
+        if (jugadorRepository.existsByDocumento(jugadorRequestDTO.getDocumento()) && jugador.getEstado()) {
             throw new Exception("El jugador ya existe.");
+        } else if (jugadorRequestDTO.getNombre().equals("") || jugadorRequestDTO.getApellido().equals("") || jugadorRequestDTO.getDomicilio().equals("")
+                || jugadorRequestDTO.getEmail().equals("") || jugadorRequestDTO.getDocumento() <= 0) {
+            throw new Exception("Valores nulos");
+        } else if (!jugador.getEstado()) {
+            jugadorRepository.updateEstadoToTrue(jugador.getIdJugador());
         } else {
-            if (jugadorRequestDTO.getNombre().equals("") || jugadorRequestDTO.getApellido().equals("") || jugadorRequestDTO.getDomicilio().equals("")
-                    || jugadorRequestDTO.getEmail().equals("") || jugadorRequestDTO.getDocumento() <= 0) {
-                throw new Exception("Valores nulos");
-            } else {
-                Ciudad ciudad = ciudadRepository.findById(jugadorRequestDTO.getId_ciudad()).orElseThrow();
-                TipoDoc tipoDoc = tipoDocRepository.findById(jugadorRequestDTO.getId_tipo_doc()).orElseThrow();
-                Jugador j = new Jugador();
-                j.setNombre(jugadorRequestDTO.getNombre());
-                j.setApellido(jugadorRequestDTO.getApellido());
-                j.setDomicilio(jugadorRequestDTO.getDomicilio());
-                j.setEmail(jugadorRequestDTO.getEmail());
-                j.setDocumento(jugadorRequestDTO.getDocumento());
-                j.setCiudad(ciudad);
-                j.setTipoDoc(tipoDoc);
-                j.setContraseña(jugadorRequestDTO.getContraseña());
+            Ciudad ciudad = ciudadRepository.findById(jugadorRequestDTO.getId_ciudad()).orElseThrow();
+            TipoDoc tipoDoc = tipoDocRepository.findById(jugadorRequestDTO.getId_tipo_doc()).orElseThrow();
+            Jugador j = new Jugador();
+            j.setNombre(jugadorRequestDTO.getNombre());
+            j.setApellido(jugadorRequestDTO.getApellido());
+            j.setDomicilio(jugadorRequestDTO.getDomicilio());
+            j.setEmail(jugadorRequestDTO.getEmail());
+            j.setDocumento(jugadorRequestDTO.getDocumento());
+            j.setCiudad(ciudad);
+            j.setTipoDoc(tipoDoc);
+            j.setEstado(true);
+            j.setContraseña(jugadorRequestDTO.getContraseña());
 
-                jugadorRepository.save(j);
-            }
+            jugadorRepository.save(j);
         }
     }
 
@@ -93,11 +94,11 @@ public class JugadorService implements iJugadorService {
     public void login(LoginRequestDTO loginRequestDTO) throws Exception {
         Jugador jugador = jugadorRepository.searchByDocumento1(loginRequestDTO.getDocumentoLogin());
         Negocio negocio = negocioRepository.searchByCuil1(loginRequestDTO.getDocumentoLogin());
-        if (jugador != null) {
+        if (jugador != null && jugador.getEstado()) {
             LoginJugadores loginJugadores = new LoginJugadores();
             loginJugadores.setJugador(jugador);
             loginJugadoresRepository.save(loginJugadores);
-        } else if (negocio != null) {
+        } else if (negocio != null && negocio.getEstado()) {
             LoginNegocio loginNegocio = new LoginNegocio();
             loginNegocio.setNegocio(negocio);
             loginNegociosRepository.save(loginNegocio);
@@ -163,8 +164,7 @@ public class JugadorService implements iJugadorService {
             try {
                 Jugador jugador = jugadorRepository.searchByDocumento1(jugadorRequestDTO.getDocumento());
                 if (jugador != null) {
-                    jugadorRepository.deleteJugadorLogin(jugador.getIdJugador());
-                    jugadorRepository.deleteJugador(jugador.getDocumento());
+                    jugadorRepository.updateEstadoToFalse(jugador.getIdJugador());
                 }
             } catch (Exception e) {
                 throw new Exception("No se pudo eliminar el jugador, campos nulos.");

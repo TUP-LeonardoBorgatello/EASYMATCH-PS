@@ -52,28 +52,26 @@
     </div>
 </header><!-- End Header -->
 
-<div class="container" style="margin-top: 20px;">
-    <h1 class="mt-5 mb-5 text-center">Reservá y disfrutá</h1>
+<div class="container" style="margin-top: 10px">
+
     <div class="row">
         <div class="col-md-6 text-center justify-content-center align-self-center">
-
-            <h3>
+            <h1 class="mt-5 mb-5 text-center">Reservá y disfrutá</h1>
+            <h3 style="margin-top: 10px">
                 Seleccioná la fecha:
             </h3>
             <p>
                 Tené en cuenta que podrás realizar varias reservas con un solo click.
             </p>
-            <br><br>
             <input type="date" id="fechaReserva" name="trip-start"
-                   value="2022-06-01"
-                   min="2022-06-01" max="2022-07-30">
-            <br><br>
-            <br><br>
+                   value="2022-06-05"
+                   min="2022-06-05" max="2022-07-30">
             <br>
+            <hr>
             <div id="horaIni" class="form-group mt-6">
                 <h3 id="horaInicio" for="id_detalle_reserva">Seleccioná el horario:</h3><br>
-                <div class="form-group mt-6" style="padding-left: 40%">
-                    <select class="form-control" name="cboHorario" id="cboHorario" style="width: 30%">
+                <div class="form-group mt-6" style="padding-left: 40%;">
+                    <select class="form-control" name="cboHorario" id="cboHorario" style="width: 30%;">
                         <option>Seleccione</option>
                         <option value="1">10</option>
                         <option value="2">11</option>
@@ -94,37 +92,33 @@
             </div>
         </div>
 
-        <div class="col-md-6">
+        <div class="col-md-6" style="padding-top: 50px; padding-left: 10px">
             <img SRC="images/EasyMatchFutbol2.jpg" class="img-fluid d-sm-block"
-                 style="width: 100%; opacity: 80%">
+                 style="width: 80%; opacity: 70%">
         </div>
 
-        <div class="container" style="margin-top: 100px;">
+        <div class="container" style="margin-top: 0px;">
             <div class="col-md-12 text-center justify-content-center align-self-center">
-                <h3 id="seleccionCancha" for="id_detalle_reserva">Seleccioná la cancha:</h3><br>
+                <h3 id="seleccionCancha" for="id_detalle_reserva">Seleccioná la cancha:</h3>
                 <p>Presiona el siguiente botón para consultar las chanchas disponibles en el horario y fecha
                     seleccionados.</p>
             </div>
             <div class="col-md-12 text-center justify-content-center align-self-center">
-                <button type="button" id="save2" class="botons">Canchas</button>
+                <button type="button" id="save2" class="botonsCancha">Canchas</button>
             </div>
-            <br>
+
             <select class="controls" name="cboCanchas" id="cboCanchas"></select>
             <br>
-            <br>
-            <br>
             <div class="col-md-12 text-center justify-content-center align-self-center">
-                <h3 id="reserva" for="id_detalle_reserva">Agregá tu reserva:</h3><br>
-                <p>Hacé click en el siguiente botón:</p>
-                <button type="button" id="save3" class="botons">Reservar</button>
-                <div>
-                    <p>Si ya terminaste tus reservas, haz click en "siguiente"</p>
-                    <button type="button" id="botonSiguiente" class="siguienteButton" disabled="true"
-                            onclick="location.href = 'Ticket.html'">Siguiente</button>
-                </div>
-
+                <h3 id="reserva" for="id_detalle_reserva">Agregá tu reserva:</h3>
             </div>
-
+            <div class="col-md-12 text-center justify-content-center align-self-center">
+                <p>Hacé click en "Reservar" y cuando completes tus reservas seleccioná "Siguiente"</p>
+                <button type="button" id="save3" class="botons">Reservar</button>
+                <button type="button" id="botonSiguiente" class="botons2" disabled="true"
+                        onclick="location.href = 'Ticket.html'">Siguiente
+                </button>
+            </div>
         </div>
     </div>
 </div>

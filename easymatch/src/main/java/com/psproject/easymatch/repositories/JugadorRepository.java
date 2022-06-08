@@ -31,4 +31,12 @@ public interface JugadorRepository extends JpaRepository<Jugador, Long> {
     @Transactional
     @Query(value = "DELETE from login_jugadores WHERE id_jugador = :id_jugador", nativeQuery = true)
     void deleteJugadorLogin(@Param("id_jugador") long id_jugador);
+
+    @Modifying
+    @Query(value = "UPDATE jugadores SET estado = false where id_jugador = :id_jugador", nativeQuery = true)
+    void updateEstadoToFalse(@Param("id_jugador") long id_jugador);
+
+    @Modifying
+    @Query(value = "UPDATE jugadores SET estado = true where id_jugador = :id_jugador", nativeQuery = true)
+    void updateEstadoToTrue(@Param("id_jugador") long id_jugador);
 }
