@@ -42,6 +42,12 @@ public class ReservaService {
     @Autowired
     DetalleTicketRepository detalleTicketRepository;
 
+    @Autowired
+    NegocioRepository negocioRepository;
+
+    @Autowired
+    LoginNegociosRepository loginNegociosRepository;
+
     public void addReserva() throws Exception {
         Reserva reserva = new Reserva();
         Long lastIdJugadorLogued = jugadoresRepository.lastIdJugadorLogued();
@@ -79,7 +85,7 @@ public class ReservaService {
                 detalleReserva.setHorarioInicial(detalleReservaRequestDTO.getHorario_inicial());
 
                 detalleReservaRepository.save(detalleReserva);
-                // canchaRepository.updateEstadoToFalse(detalleReservaRequestDTO.getId_cancha());
+                reservaRepository.updateEstadoToFinalizado(lastReservaId);
             } else {
                 throw new Exception("Error al agregar detalle de reserva, cancha reservada.");
             }
@@ -135,7 +141,7 @@ public class ReservaService {
         detalleTicket.setReserva(reserva);
 
         detalleTicketRepository.save(detalleTicket);
-        reservaRepository.updateEstadoToFinalizado(lastReservaId);
+        reservaRepository.updateEstadoToFacturado(lastReservaId);
     }
 
     public TicketDecargaResponseDTO findDetalleTicket() {
@@ -167,7 +173,7 @@ public class ReservaService {
         List<DetalleReservaConsultaResponseDTO> detalleReservaConsultaResponseDTOS = new ArrayList<>();
         for (Reserva r : reservas) {
             //El siguiente if es para validar que la fecha sea antes que hoy, entonces cambia el estado de la reserva a Cancelada.
-            if (r.getFecha().isBefore(LocalDate.now())){
+            if (r.getFecha().isBefore(LocalDate.now())) {
                 reservaRepository.updateEstadoToCancelado(r.getIdReserva());
             }
             DetalleReservaConsultaResponseDTO deDTO = new DetalleReservaConsultaResponseDTO();
@@ -187,6 +193,29 @@ public class ReservaService {
             }
         }
         return detalleReservaConsultaResponseDTOS;
+    }
+
+    public List<DetalleReservaNegocioResponseDTO> findDetalleReservaNegocio() {
+        Long lastIdNegocioLogued = loginNegociosRepository.lastIdNegocioLogued();
+        LoginNegocio login = loginNegociosRepository.findById(lastIdNegocioLogued).orElseThrow();
+        Negocio negocio = negocioRepository.findById(login.getNegocio().getIdNegocio()).orElseThrow();
+        List<Cancha> canchas = canchaRepository.findCanchasByNegocioId(negocio.getIdNegocio());
+        List<DetalleReservaNegocioResponseDTO> detalleReservaNegocioResponseDTOList = new ArrayList<>();
+        for (Cancha c : canchas) {
+            List<DetalleReserva> detalles = detalleReservaRepository.findDetalleReservaByCancha(c.getIdCancha());
+            for (DetalleReserva dd : detalles) {
+                DetalleReservaNegocioResponseDTO detalleReservaNegocioResponseDTO = new DetalleReservaNegocioResponseDTO();
+                detalleReservaNegocioResponseDTO.setCancha(c.getDescripcion());
+                detalleReservaNegocioResponseDTO.setTipoCancha(c.getTipoCancha().getDescripcion());
+                detalleReservaNegocioResponseDTO.setIdReserva(dd.getReserva().getIdReserva());
+                detalleReservaNegocioResponseDTO.setFechaReserva(dd.getReserva().getFecha().toString());
+                detalleReservaNegocioResponseDTO.setFechaHora(dd.getFechaReserva() + " hora: " + dd.getHorarioInicial());
+                detalleReservaNegocioResponseDTO.setEstado(dd.getReserva().getEstado().getDescripcion());
+                detalleReservaNegocioResponseDTO.setJugador(dd.getReserva().getJugador().getNombre() + " " + dd.getReserva().getJugador().getApellido());
+                detalleReservaNegocioResponseDTOList.add(detalleReservaNegocioResponseDTO);
+            }
+        }
+        return detalleReservaNegocioResponseDTOList;
     }
 
     public void deleteReserva(ReservaDeleteRequestDTO reservaDelete) throws Exception {

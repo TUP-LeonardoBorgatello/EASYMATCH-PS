@@ -44,13 +44,15 @@ public class NegocioService implements iNegocioService {
     @Override
     public void addNegocio(NegocioRequestDTO negocioRequestDTO) throws Exception {
         Negocio negocio = negocioRepository.searchByCuil1(negocioRequestDTO.getCuil());
-        if (negocioRepository.existsByCuil(negocioRequestDTO.getCuil()) && negocio.getEstado()) {
-            throw new Exception("El negocio ya existe.");
+        if (negocioRepository.existsByCuil(negocioRequestDTO.getCuil())) {
+            if (negocio.getEstado()) {
+                throw new Exception("El negocio ya existe.");
+            } else {
+                negocioRepository.updateNegocioToTrue(negocio.getIdNegocio());
+            }
         } else if (negocioRequestDTO.getNombre() == "" || negocioRequestDTO.getDomicilio() == ""
                 || negocioRequestDTO.getEmail() == "" || negocioRequestDTO.getCuil() <= 0) {
             throw new Exception("Valores nulos");
-        } else if (!negocio.getEstado()) {
-            negocioRepository.updateNegocioToTrue(negocio.getIdNegocio());
         } else {
             Ciudad ciudad = ciudadRepository.findById(negocioRequestDTO.getId_ciudad()).orElseThrow();
             Negocio n = new Negocio();

@@ -78,6 +78,12 @@ public class ReservaController {
     }
 
     @CrossOrigin(origins = "*")
+    @GetMapping("/consulta/reservas/negocio")
+    public List<DetalleReservaNegocioResponseDTO> getDetalleReservaNegocio() throws Exception {
+        return reservaService.findDetalleReservaNegocio();
+    }
+
+    @CrossOrigin(origins = "*")
     @PostMapping("/reserva/cancelada")
     public ResponseEntity<?> cancelarReserva(@RequestBody ReservaDeleteRequestDTO reservaDeleteRequest) throws Exception {
         ServiceResponse<?> response = new ServiceResponse<>("success", "Reserva cancelada.");

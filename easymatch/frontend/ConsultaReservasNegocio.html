@@ -4,7 +4,7 @@
 <head>
     <meta charset='utf-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <title>Consulta Reservas</title>
+    <title>Consulta Reservas Negocio</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <!--    <link rel='stylesheet' type='text/css' media='screen' href='index.css'>-->
     <link rel="icon" type="image/png" href="images/EASY-MATCH2.png"/>
@@ -36,8 +36,8 @@
 
         <nav id="navbar" class="navbar">
             <ul>
-                <li><a class="nav-link scrollto" href="inicioReserva.html">Volver</a></li>
-                <li><a class="nav-link scrollto" href="administraPerfilJugador.html">Administrar</a></li>
+                <li><a class="nav-link scrollto" href="MenuNegocio.html">Volver</a></li>
+                <li><a class="nav-link scrollto" href="administraPerfilNegocio.html">Administrar</a></li>
                 </li>
                 <li class="dropdown"><a href="#"><span><img src="images/user.png" class="ms-3 mx-auto">
                                 Jugador</span> <i class="bi bi-chevron-down"></i></a>
@@ -54,20 +54,18 @@
 
 <div class="container" style="margin-top: 20px;">
     <h1 class="mt-5 mb-5 text-center">Historial de reservas</h1>
-    <p class="mt-5 mb-5 text-center">Tené en cuenta que si cancelás, deberás generar una nueva reserva desde el inicio.</p>
-    <p class="mt-7 mb-5 text-center">Solo podrás cancelar reservas confirmadas en el día.</p>
+    <p class="mt-7 mb-5 text-center">Solo podrás cancelar reservas en estado a confirmar.</p>
     <hr>
     <hr>
     <div class="alert alert-primary" id="msg" style="display: none;" role="alert"></div>
-    <table id="jugadores" class="table table-bordered" style="width:100%">
+    <table id="reservas" class="table table-bordered" style="width:100%">
         <thead>
         <tr>
             <th>Reserva</th>
             <th>Cancha</th>
             <th>Tipo de Cancha</th>
-            <th>Negocio</th>
+            <th>Cliente</th>
             <th>Fecha y hora de inicio</th>
-            <th>Dirección</th>
             <th>Fecha de reserva</th>
             <th>Estado</th>
         </tr>
@@ -77,9 +75,8 @@
             <th>Reserva</th>
             <th>Cancha</th>
             <th>Tipo de Cancha</th>
-            <th>Negocio</th>
+            <th>Cliente</th>
             <th>Fecha y hora de inicio</th>
-            <th>Dirección</th>
             <th>Fecha de reserva</th>
             <th>Estado</th>
         </tr>
@@ -88,9 +85,9 @@
     <hr>
     <hr>
     <div>
-        <p>Para una nueva reserva presioná el siguiente botón:</p>
+        <p>Si queres conocer estadísticas de tus reservas ingresá en el siguiente botón:</p>
         <button type="button" id="btnNuevaReserva" class="siguienteButton"
-                onclick="location.href = 'inicioReserva.html'">Inicio</button>
+                onclick="location.href = 'MenuNegocio.html'">Reportes</button>
     </div>
 </div>
 
@@ -111,12 +108,12 @@
         backend: 'http://localhost:8080/api/easymatch',
         table: null,
         init: function () {
-            app.initDatatable('#jugadores');
+            app.initDatatable('#reservas');
         },
-        initDatatable: function (documento) {
-            app.table = $(documento).DataTable({
+        initDatatable: function (data) {
+            app.table = $(data).DataTable({
                 ajax: {
-                    url: app.backend + '/consulta/reservas',
+                    url: app.backend + '/consulta/reservas/negocio',
                     dataSrc: function (json) {
                         return json;
                     }
@@ -126,9 +123,8 @@
                     {data: "idReserva"},
                     {data: "cancha"},
                     {data: "tipoCancha"},
-                    {data: "negocio"},
+                    {data: "jugador"},
                     {data: "fechaHora"},
-                    {data: "direccion"},
                     {data: "fechaReserva"},
                     {data: "estado"},
                 ],
@@ -149,7 +145,7 @@
                 ]
             });
 
-            $('#jugadores tbody').on('click', 'tr', function () {
+            $('#reservas tbody').on('click', 'tr', function () {
                 if ($(this).hasClass('table-active')) {
                     $(this).removeClass('table-active');
                 } else {

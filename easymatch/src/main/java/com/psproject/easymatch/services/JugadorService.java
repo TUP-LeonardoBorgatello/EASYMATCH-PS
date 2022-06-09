@@ -65,13 +65,15 @@ public class JugadorService implements iJugadorService {
     @Override
     public void addJugador(JugadorRequestDTO jugadorRequestDTO) throws Exception {
         Jugador jugador = jugadorRepository.searchByDocumento1(jugadorRequestDTO.getDocumento());
-        if (jugadorRepository.existsByDocumento(jugadorRequestDTO.getDocumento()) && jugador.getEstado()) {
-            throw new Exception("El jugador ya existe.");
+        if (jugadorRepository.existsByDocumento(jugadorRequestDTO.getDocumento())) {
+            if (jugador.getEstado()) {
+                throw new Exception("El jugador ya existe.");
+            } else {
+                jugadorRepository.updateEstadoToTrue(jugador.getIdJugador());
+            }
         } else if (jugadorRequestDTO.getNombre().equals("") || jugadorRequestDTO.getApellido().equals("") || jugadorRequestDTO.getDomicilio().equals("")
                 || jugadorRequestDTO.getEmail().equals("") || jugadorRequestDTO.getDocumento() <= 0) {
             throw new Exception("Valores nulos");
-        } else if (!jugador.getEstado()) {
-            jugadorRepository.updateEstadoToTrue(jugador.getIdJugador());
         } else {
             Ciudad ciudad = ciudadRepository.findById(jugadorRequestDTO.getId_ciudad()).orElseThrow();
             TipoDoc tipoDoc = tipoDocRepository.findById(jugadorRequestDTO.getId_tipo_doc()).orElseThrow();

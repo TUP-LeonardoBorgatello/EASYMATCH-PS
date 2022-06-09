@@ -26,4 +26,9 @@ public interface DetalleReservaRepository extends JpaRepository<DetalleReserva, 
 
     @Query(value = "select * from detalle_reserva where id_reserva = :id_reserva", nativeQuery = true)
     List<DetalleReserva> findDetalleByReservaId(@Param("id_reserva") long id_reserva);
+
+    @Query(value = "select * from detalle_reserva where id_cancha = :id_cancha", nativeQuery = true)
+    List<DetalleReserva> findDetalleReservaByCancha(@Param("id_cancha") long id_cancha);
+
+
 }

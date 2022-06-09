@@ -26,4 +26,8 @@ public interface ReservaRepository extends JpaRepository<Reserva, Long> {
     @Query(value = "UPDATE reservas SET id_estado = 3 where id_reserva = :id_reserva", nativeQuery = true)
     void updateEstadoToCancelado(@Param("id_reserva") long id_reserva);
 
+    @Modifying
+    @Query(value = "UPDATE reservas SET id_estado = 1 where id_reserva = :id_reserva", nativeQuery = true)
+    void updateEstadoToFacturado(@Param("id_reserva") long id_reserva);
+
 }
