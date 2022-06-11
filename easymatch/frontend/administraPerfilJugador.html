@@ -224,6 +224,9 @@
         if (selected === "PASAPORTE") {
           selected = 2
         }
+        if (selected === "CUIL") {
+          selected = 3
+        }
 
         let comboCiudad = document.getElementById("cboCiudad");
         let selectedCiudad = comboCiudad.options[comboCiudad.selectedIndex].text;
@@ -255,6 +258,9 @@
         if (selectedCiudad === "Formosa") {
           selectedCiudad = 9
         }
+        if (selectedCiudad === "Cordoba") {
+          selectedCiudad = 10
+        }
 
         app.save({
           nombre: $('#nombre').val(),
@@ -276,6 +282,9 @@
         }
         if (selected === "PASAPORTE") {
           selected = 2
+        }
+        if (selected === "CUIL") {
+          selected = 3
         }
 
         let comboCiudad = document.getElementById("cboCiudad2");
@@ -307,6 +316,9 @@
         }
         if (selectedCiudad === "Formosa") {
           selectedCiudad = 9
+        }
+        if (selectedCiudad === "Cordoba") {
+          selectedCiudad = 10
         }
 
         app.save2({

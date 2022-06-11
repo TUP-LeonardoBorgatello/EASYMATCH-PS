@@ -146,7 +146,7 @@ public class JugadorService implements iJugadorService {
                 if (jugador != null) {
                     jugador.setNombre(jugadorRequestDTO.getNombre());
                     jugador.setApellido(jugadorRequestDTO.getApellido());
-                    jugador.setEmail(jugador.getEmail());
+                    jugador.setEmail(jugadorRequestDTO.getEmail());
                     Ciudad ciudad = ciudadRepository.findById(jugadorRequestDTO.getId_ciudad()).orElseThrow();
                     jugador.setCiudad(ciudad);
                     TipoDoc tipoDoc = tipoDocRepository.findById(jugadorRequestDTO.getId_tipo_doc()).orElseThrow();

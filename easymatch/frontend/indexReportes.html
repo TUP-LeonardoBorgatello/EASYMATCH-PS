@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Reportes</title>
+    <link rel="icon" type="image/png" href="images/EASY-MATCH2.png"/>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css'
+          href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css'>
+    <link rel='stylesheet' type='text/css' href='https://cdn.datatables.net/1.10.22/css/dataTables.bootstrap4.min.css'>
+    <link rel='stylesheet' type='text/css'
+          href='https://cdn.datatables.net/buttons/1.6.4/css/buttons.dataTables.min.css'>
+    <link rel="stylesheet" href="css/StyleForRegister.css">
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+    <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+    <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+    <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+    <link href="assets/css/style.css" rel="stylesheet">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+
+</head>
+
+<body>
+<header id="header" class="d-flex align-items-center">
+    <div class="container d-flex align-items-center justify-content-between">
+
+        <div class="logo">
+            <a href="indexAdmin.html"><img
+                    src="images/EASY-MATCH2.png" alt=""
+                    class="img-fluid"></a>
+        </div>
+
+        <nav id="navbar" class="navbar">
+            <ul>
+                <li><a class="nav-link scrollto" href="MenuNegocio.html">Volver</a></li>
+                </li>
+                <li class="dropdown"><a href="#"><span><img src="images/user.png" class="ms-3 mx-auto">
+                                Negocio</span> <i class="bi bi-chevron-down"></i></a>
+                    <ul>
+                        <li><a href="login.html">Logout</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <i class="bi bi-list mobile-nav-toggle"></i>
+        </nav><!-- .navbar -->
+
+    </div>
+</header><!-- End Header -->
+
+<body>
+<div class="container">
+    <h1 class="mt-5 mb-5 text-center">Reportes</h1>
+    <main style="width: 80%">
+        <section style="padding-top: 5px">
+            <h4>En la siguiente tabla podrá verificar la cancha más reservada:</h4>
+            <br>
+            <h5>Seleccione el mes que desee:</h5>
+
+            <select class="form-control" name="cboMes" id="cboMes" style="width: 20%;">
+                <option>Seleccione</option>
+                <option value="1">Enero</option>
+                <option value="2">Febrero</option>
+                <option value="3">Marzo</option>
+                <option value="4">Abril</option>
+                <option value="5">Mayo</option>
+                <option value="6">Junio</option>
+                <option value="7">Julio</option>
+                <option value="8">Agosto</option>
+                <option value="9">Septiembre</option>
+                <option value="10">Octubre</option>
+                <option value="11">Noviembre</option>
+                <option value="12">Diciembre</option>
+            </select>
+            <br>
+            <div class="container mt-6 border">
+                <br>
+                <div class="row">
+                    <div class="col-3">
+                        <img src="images/EASY-MATCH2.png" class="ms-3"
+                             style="width: 15%"><span class="h5">Reporte 1</span>
+                    </div>
+                    <hr>
+                    <table class="table  text-center mb-4">
+                        <thead>
+                        <tr>
+                            <th scope="col">Cancha más reservada</th>
+                            <th scope="col">Cantidad de veces reservada en el mes</th>
+                            <th scope="col">Número de cancha</th>
+                        </tr>
+                        </thead>
+                        <tbody id="reporte1">
+
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="col-xl-12 mt-4 botones">
+                <button type="button" id="consultar"
+                        class="reporteButtons">Consultar
+                </button>
+            </div>
+            <section>
+                <hr>
+                <h4>En la siguiente tabla podrás consultar la cantidad de reservas realizadas entre fechas y el estado
+                    elegido:</h4>
+                <br>
+                <h5>Estado:</h5>
+
+                <select class="form-control" name="cboMes" id="cboEstado" style="width: 14%;">
+                    <option>Seleccione</option>
+                    <option value="1">Facturadas</option>
+                    <option value="2">A confirmar</option>
+                    <option value="3">Canceladas</option>
+                </select>
+                <br>
+                <h5>Fechas:</h5>
+                <div class="row" style="width: 60%">
+                    <div class="col-6">
+                        Desde: <input type="date" class="form-control" id="fechaInicio" style="width: 50%;">
+                    </div>
+                    <div class="col-6">
+                        Hasta: <input type="date" class="form-control" id="fechaFin" style="width: 50%;">
+                    </div>
+                </div>
+                <br>
+                <div class="container mt-6 border">
+                    <br>
+                    <div class="row">
+                        <div class="col-3">
+                            <img src="images/EASY-MATCH2.png" class="ms-3"
+                                 style="width: 15%"><span class="h5">Reporte 2</span>
+                        </div>
+
+                        <table class="table  text-center mb-4">
+                            <thead>
+                            <tr>
+                                <th scope="col">Cantidad de reservas</th>
+                            </tr>
+                            </thead>
+                            <tbody id="reporte2">
+
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="col-xl-12 mt-4 botones">
+                    <button type="button" id="consultar2"
+                            class="reporteButtons">Consultar
+                    </button>
+                </div>
+            </section>
+
+
+            <hr>
+            <h4>Gráfico de cantidad de reservas entre fechas:</h4>
+            <section class="col-xl-8 col-md-4 col-sm-4">
+                <figure style="width: 60%">
+                    <h5 class="text-center" for="nombre">Reservas por Fechas </h5>
+                    <div class="row">
+                        <div class="col-6">
+                            <input type="date" class="form-control" id="fechaInicio2">
+                        </div>
+                        <div class="col-6">
+                            <input type="date" class="form-control" id="fechaFin2">
+                        </div>
+                        <div class="col-xl-12 mt-4 botones">
+                            <button type="button" id="consultar3"
+                                    class="reporte3Buttons" onclick="reporteFecha();">Ver Gráfico
+                            </button>
+                        </div>
+                    </div>
+                    <canvas id="reporte3"></canvas>
+                </figure>
+            </section>
+            <hr>
+            <h4>Gráfico de monto por fechas de reservas facturadas:</h4>
+            <section>
+                <figure>
+                    <h5 class="text-center" for="nombre"></h5>
+                    <canvas id="reporte4"></canvas>
+                    <br>
+                    <br>
+                </figure>
+            </section>
+        </section>
+    </main>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="js/scriptReporte1.js"></script>
+<script src="js/scriptReporte2.js"></script>
+<script src="js/scriptReporte3.js"></script>
+
+</body>
+
+<script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>
+<script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.6.4/js/dataTables.buttons.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+
+
+<script>
+    var app = {
+        backend: 'http://localhost:8080/api/easymatch',
+        table: null,
+        init: function () {
+            $("#consultar").click(function () {
+                $("#reporte1").empty();
+                let comboMes = document.getElementById("cboMes");
+                let selectedMes = comboMes.options[comboMes.selectedIndex].text;
+                if (selectedMes === "Enero") {
+                    selectedMes = 1;
+                }
+                if (selectedMes === "Febrero") {
+                    selectedMes = 2;
+                }
+                if (selectedMes === "Marzo") {
+                    selectedMes = 3;
+                }
+                if (selectedMes === "Abril") {
+                    selectedMes = 4;
+                }
+                if (selectedMes === "Mayo") {
+                    selectedMes = 5;
+                }
+                if (selectedMes === "Junio") {
+                    selectedMes = 6;
+                }
+                if (selectedMes === "Julio") {
+                    selectedMes = 7;
+                }
+                if (selectedMes === "Agosto") {
+                    selectedMes = 8;
+                }
+                if (selectedMes === "Septiembre") {
+                    selectedMes = 9;
+                }
+                if (selectedMes === "Octubre") {
+                    selectedMes = 10;
+                }
+                if (selectedMes === "Noviembre") {
+                    selectedMes = 11;
+                }
+                if (selectedMes === "Diciembre") {
+                    selectedMes = 12;
+                }
+                console.log(selectedMes);
+                $.ajax({
+                    url: "http://localhost:8080/api/easymatch/reporte1/" + selectedMes + "",
+                    type: "GET",
+                    success: function (result) {
+                        app.crearTabla(result)
+                        //location.reload();
+                    },
+                    error: function (e) {
+                        if (selectedMes === "Seleccione") {
+                            swal("Advertencia", "Seleccione un mes", "info");
+                            return false;
+                        } else {
+                            swal("Error", "No existen datos en el mes seleccionado, probá con otro", "warning");
+                        }
+                    }
+                });
+            });
+            $("#consultar2").click(function () {
+                $("#reporte2").empty();
+                let comboEstado = document.getElementById("cboEstado");
+                let selectedEstado = comboEstado.options[comboEstado.selectedIndex].text;
+                if (selectedEstado === "Facturadas") {
+                    selectedEstado = 1;
+                }
+                if (selectedEstado === "A confirmar") {
+                    selectedEstado = 2;
+                }
+                if (selectedEstado === "Canceladas") {
+                    selectedEstado = 3;
+                }
+                console.log(selectedEstado);
+                let fechaReservaInicial = document.getElementById("fechaInicio").value;
+                let fechaReservaFinal = document.getElementById("fechaFin").value;
+                $.ajax({
+                    url: "http://localhost:8080/api/easymatch/reporte2/" + fechaReservaInicial + "/" + fechaReservaFinal + "/" + selectedEstado + "",
+                    type: "GET",
+                    success: function (result) {
+                        app.crearTabla2(result)
+                        //location.reload();
+                    },
+                    error: function (e) {
+                        if (selectedEstado === "Seleccione") {
+                            swal("Advertencia", "Seleccione un estado", "info");
+                            return false;
+                        } else {
+                            swal("Error", "No existen datos con el estado seleccionado, probá con otro", "warning");
+                        }
+                    }
+                });
+            });
+        },
+        crearTabla: function (datos) {
+            var html = "<tr>";
+            html += "<td>" + datos.descripcion + "</td>";
+            html += "<td>" + datos.cantidadReservada + "</td>";
+            html += "<td>" + datos.id_cancha + "</td>";
+            html += "</tr>";
+            $("#reporte1").append(html);
+
+        },
+        crearTabla2: function (datos) {
+            var html = "<tr>";
+            html += "<td>" + datos.cantidadReservas + "</td>";
+            html += "</tr>";
+            $("#reporte2").append(html);
+        }
+    };
+
+    $(document).ready(function () {
+        app.init();
+    });
+
+</script>
+
+
+</body>
+
+</html>

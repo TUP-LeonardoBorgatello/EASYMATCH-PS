@@ -1,8 +1,6 @@
 package com.psproject.easymatch.services;
 
-import com.psproject.easymatch.dtos.CanchasRequestDTO;
-import com.psproject.easymatch.dtos.CanchasReservasResponseDTO;
-import com.psproject.easymatch.dtos.CanchasResponseDTO;
+import com.psproject.easymatch.dtos.*;
 import com.psproject.easymatch.models.*;
 import com.psproject.easymatch.repositories.*;
 import com.psproject.easymatch.utils.CanchaMapper;
@@ -13,6 +11,7 @@ import javax.transaction.Transactional;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -37,6 +36,8 @@ public class AuxService {
     NegocioRepository negocioRepository;
     @Autowired
     LoginNegociosRepository loginNegociosRepository;
+    @Autowired
+    ReservaRepository reservaRepository;
 
     public List<TipoDoc> findAllTipoDoc() {
         List<TipoDoc> tipoDocs = tipoDocRepository.findAll();
@@ -201,5 +202,68 @@ public class AuxService {
                 throw new Exception("No se pudo cambiar el estado de la cancha, campos nulos.");
             }
         }
+    }
+
+    //REPORTES:
+
+    public Reporte1ResponseDTO findCanchaMasReservada(long mes){
+        Long lastIdNegocioLogued = loginNegociosRepository.lastIdNegocioLogued();
+        LoginNegocio login = loginNegociosRepository.findById(lastIdNegocioLogued).orElseThrow();
+        Negocio negocio = negocioRepository.findById(login.getNegocio().getIdNegocio()).orElseThrow();
+        List<Long> canchasIds = detalleReservaRepository.canchasIds(mes, negocio.getIdNegocio());
+
+        HashMap<Long, Long> mapa = new HashMap<>();
+
+        for (Long l : canchasIds) {
+            long numero = l;
+            if (mapa.containsKey(numero)) {
+                mapa.put(numero, mapa.get(numero) + 1);
+            } else {
+                mapa.put(numero, 1L);
+            }
+        }
+        long moda = 0, mayor = 0;
+        for (HashMap.Entry<Long, Long> entry : mapa.entrySet()) {
+            if (entry.getValue() > mayor) {
+                mayor = entry.getValue();
+                moda = entry.getKey();
+            }
+        }
+        Cancha cancha = canchaRepository.findById(moda).orElseThrow();
+        Reporte1ResponseDTO reporte1ResponseDTO = new Reporte1ResponseDTO();
+        reporte1ResponseDTO.setId_cancha(cancha.getIdCancha());
+        reporte1ResponseDTO.setDescripcion(cancha.getDescripcion());
+        reporte1ResponseDTO.setCantidadReservada(mayor);
+
+        return reporte1ResponseDTO;
+
+    }
+
+
+    public CantReservasXFechaDTO findCantReservasEntreFechas(String fecha1, String fecha2, long estado){
+        Long lastIdNegocioLogued = loginNegociosRepository.lastIdNegocioLogued();
+        LoginNegocio login = loginNegociosRepository.findById(lastIdNegocioLogued).orElseThrow();
+        Negocio negocio = negocioRepository.findById(login.getNegocio().getIdNegocio()).orElseThrow();
+        LocalDate f1 = LocalDate.parse(fecha1);
+        LocalDate f2 = LocalDate.parse(fecha2);
+        return reservaRepository.reporte2(f1, f2, estado, negocio.getIdNegocio());
+
+    }
+
+    public List<CantReserXFechaGraficoDTO> findReservasXFechas(String fecha1, String fecha2){
+        Long lastIdNegocioLogued = loginNegociosRepository.lastIdNegocioLogued();
+        LoginNegocio login = loginNegociosRepository.findById(lastIdNegocioLogued).orElseThrow();
+        Negocio negocio = negocioRepository.findById(login.getNegocio().getIdNegocio()).orElseThrow();
+        LocalDate f1 = LocalDate.parse(fecha1);
+        LocalDate f2 = LocalDate.parse(fecha2);
+        return reservaRepository.reporte3(f1, f2, negocio.getIdNegocio());
+
+    }
+
+    public List<MontoXReservaConfirmadaDTO> findMontoXReserva(){
+        Long lastIdNegocioLogued = loginNegociosRepository.lastIdNegocioLogued();
+        LoginNegocio login = loginNegociosRepository.findById(lastIdNegocioLogued).orElseThrow();
+        Negocio negocio = negocioRepository.findById(login.getNegocio().getIdNegocio()).orElseThrow();
+        return reservaRepository.reporte4(negocio.getIdNegocio());
     }
 }

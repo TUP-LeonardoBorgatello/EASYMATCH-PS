@@ -1,4 +1,5 @@
-var ctx = document.getElementById('reporte1')
+
+var ctx = document.getElementById('reporte4')
 var mychart = new Chart(ctx,
     {
         type: 'line',
@@ -6,8 +7,8 @@ var mychart = new Chart(ctx,
             {
                 datasets:
                     [{
-                        backgroundColor: ['#FC0101','#FC6401','#FCE901','#27FC01','#01FCFC','#0177FC','#8A01FC','#01FCA1','#FCB401','#01CBFC','#B8FC01'],
-                        label: 'Cantiadad de Productos por pedido',
+                        backgroundColor: ['#01fc05','#2ffc01','#01fc16','#27FC01','#01FCFC','#0177FC','#8A01FC','#01FCA1','#FCB401','#01CBFC','#B8FC01'],
+                        label: 'Montos por fechas de reservas facturadas',
                         borderWidth: 3
                     }]
             },
@@ -30,7 +31,7 @@ var mychart = new Chart(ctx,
     })
 
 
-url ='http://localhost:8080/api/easyventas/reporte1';
+url ='http://localhost:8080/api/easymatch/reporte4';
 
 fetch(url)
     .then(response => response.json())
@@ -39,8 +40,8 @@ fetch(url)
 
 function mostrar(productos) {
     productos.forEach(element => {
-        mychart.data['labels'].push(element.numeroPedido)
-        mychart.data['datasets'][0].data.push(element.cantidad)
+        mychart.data['labels'].push(element.idReservaFecha)
+        mychart.data['datasets'][0].data.push(element.monto)
     });
 
 }

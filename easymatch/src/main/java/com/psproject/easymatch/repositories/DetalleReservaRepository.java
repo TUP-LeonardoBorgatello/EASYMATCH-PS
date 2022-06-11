@@ -1,5 +1,6 @@
 package com.psproject.easymatch.repositories;
 
+import com.psproject.easymatch.dtos.Reporte1ResponseDTO;
 import com.psproject.easymatch.models.DetalleReserva;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -29,6 +30,12 @@ public interface DetalleReservaRepository extends JpaRepository<DetalleReserva, 
 
     @Query(value = "select * from detalle_reserva where id_cancha = :id_cancha", nativeQuery = true)
     List<DetalleReserva> findDetalleReservaByCancha(@Param("id_cancha") long id_cancha);
+
+    //REPORTES:
+
+    @Query(value = "select d.id_cancha from detalle_reserva d join canchas c on c.id_cancha = d.id_cancha " +
+            "where month(fecha_reserva) = :mes and c.id_negocio = :id_negocio", nativeQuery = true)
+    List<Long> canchasIds(@Param("mes") long mes, @Param("id_negocio") long id_negocio);
 
 
 }
