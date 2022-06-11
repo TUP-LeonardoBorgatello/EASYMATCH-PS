@@ -87,13 +87,15 @@
         <hr>
     </div>
 </div>
+
 <div class="container text-center mt-5">
     <div class="row">
         <div class="col-xl-12 mt-4 botones">
-            <p>Descargá tu ticket:</p>
             <button onclick="HTMLtoPDF()" type="button" id="confirmar"
                     class="siguienteButton" href="">Descargar
             </button>
+            <br>
+            <a href="inicioReserva.html">Volver</a>
         </div>
     </div>
 
@@ -136,7 +138,6 @@
             .save()
             .catch(err => console.log(err))
             .then((willDelete) => {
-                location.href = "inicioReserva.html";
             });
     }
 

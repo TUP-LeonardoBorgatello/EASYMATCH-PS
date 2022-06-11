@@ -27,7 +27,7 @@
     <div class="container d-flex align-items-center justify-content-between">
 
         <div class="logo">
-            <a href="indexAdmin.html"><img
+            <a><img
                     src="images/EASY-MATCH2.png" alt=""
                     class="img-fluid"></a>
         </div>
@@ -91,13 +91,13 @@
                 success: function (result) {
                     if (result.status === "success") {
                         swal({
-                            title: "Reserva agregada",
+                            title: "Dirigiendo a reservas...",
                             text: "Inicio de reserva.",
                             icon: "success",
                         })
                             .then((willDelete) => {
                                 if (willDelete) {
-                                    swal("Redirigiendo a login", {
+                                    swal("Redirigiendo...", {
                                         icon: "success",
                                     });
                                 }
