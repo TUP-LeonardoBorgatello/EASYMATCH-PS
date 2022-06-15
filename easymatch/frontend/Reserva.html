@@ -37,7 +37,9 @@
         <nav id="navbar" class="navbar">
             <ul>
                 <li><a class="nav-link scrollto" href="ConsultaReservas.html">Reservas</a></li>
-                <li><a class="nav-link scrollto" href="administraPerfilJugador.html">Administrar</a></li>
+                <li><a class="nav-link scrollto" href="administraPerfilJugador.html">Perfil</a></li>
+                </li>
+                <li><a class="nav-link scrollto" onclick="$('#ReservaAyudaModal').modal();">Ayuda</a>
                 </li>
                 <li class="dropdown"><a href="#"><span><img src="images/user.png" class="ms-3 mx-auto">
                                 Jugador</span> <i class="bi bi-chevron-down"></i></a>
@@ -51,7 +53,42 @@
 
     </div>
 </header><!-- End Header -->
-
+<div class="modal fade" id="ReservaAyudaModal" tabindex="-1" role="dialog" aria-labelledby="modalTitle"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="modalTitle">Panel de Ayuda</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <h5>Reserva</h5>
+                    <p>En esta pantalla deberás seleccionar las opciones que se te ofrecen para registrar tu reserva.</p>
+                    <hr>
+                    <p>Primero podras elegir la fecha haciendo click en el calendario, para luego seleccionar el día a reservar.</p>
+                    <hr>
+                    <p>Como segunda opción es necesario que selecciones el horario, y para ello dispones del desplegable debajo del calendario.</p>
+                    <hr>
+                    <p>Una vez que seleccionas la fecha y hora, podrás ver las canchas disponibles haciendo click en el
+                        botón a disposición "Canchas". Tené en cuenta que deberás elegir el horario y la fecha previamente para poder
+                    consultar las canchas a disposición.</p>
+                    <hr>
+                    <p>Para agregar la cancha elegida en el desplegable, deberás hacer click en el botón "Reservar".
+                        Tené en cuenta de que podrás realizar varias reservas para luego pasar al siguiente paso.</p>
+                    <hr>
+                    <p>Como último paso, y ya terminada la selección de todos los ítems disponibles, deberás hacer click en el botón
+                        "Siguiente" para poder ser redirigido a la sección de Tickets.</p>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
 <div class="container" style="margin-top: 10px">
 
     <div class="row">

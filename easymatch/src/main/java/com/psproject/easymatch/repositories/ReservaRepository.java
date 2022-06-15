@@ -46,7 +46,7 @@ public interface ReservaRepository extends JpaRepository<Reserva, Long> {
     List<CantReserXFechaGraficoDTO> reporte3(LocalDate fecha1, LocalDate fecha2, long idNegocio);
     @Query(value = "select new com.psproject.easymatch.dtos.MontoXReservaConfirmadaDTO(sum(c.precioCancha), r.fecha) from DetalleReserva d " +
             "join Cancha c on c.idCancha = d.cancha.idCancha join Reserva r on r.idReserva = d.reserva.idReserva " +
-            "where r.estado.idEstado = 1 and c.negocio.idNegocio = ?1 group by r.idReserva" )
+            "where r.estado.idEstado = 1 and c.negocio.idNegocio = ?1 group by r.fecha" )
     List<MontoXReservaConfirmadaDTO> reporte4(long idNegocio);
 
 }

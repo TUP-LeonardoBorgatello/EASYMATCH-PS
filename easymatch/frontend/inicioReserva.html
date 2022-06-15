@@ -35,7 +35,9 @@
         <nav id="navbar" class="navbar">
             <ul>
                 <li><a class="nav-link scrollto" href="ConsultaReservas.html">Reservas</a></li>
-                <li><a class="nav-link scrollto" href="administraPerfilJugador.html">Administrar</a></li>
+                <li><a class="nav-link scrollto" href="administraPerfilJugador.html">Perfil</a>
+                </li>
+                <li><a class="nav-link scrollto" onclick="$('#inicioReservaAyudaModal').modal();">Ayuda</a>
                 </li>
                 <li class="dropdown"><a href="#"><span><img src="images/user.png" class="ms-3 mx-auto">
                                 Jugador</span> <i class="bi bi-chevron-down"></i></a>
@@ -49,7 +51,30 @@
 
     </div>
 </header><!-- End Header -->
-
+<div class="modal fade" id="inicioReservaAyudaModal" tabindex="-1" role="dialog" aria-labelledby="modalTitle"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="modalTitle">Panel de Ayuda</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <h5>Iniciar reserva</h5>
+                    <p>En esta pantalla podrás comenzar con tu reserva.
+                    Hacé click en el botón verde y serás rederigido al sector donde podrás seleccionar
+                    tus preferencias para reservar.</p>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
 <div class="container" style="margin-top: 20px;">
     <h1 class="mt-5 mb-5 text-center">Bienvenido a EasyMatch</h1>
     <div class="row">

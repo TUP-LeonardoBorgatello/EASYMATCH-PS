@@ -43,6 +43,8 @@
             <ul>
                 <li><a class="nav-link scrollto" href="MenuNegocio.html">Volver</a></li>
                 </li>
+                <li><a class="nav-link scrollto" onclick="$('#ReportesNegocioAyudaModal').modal();">Ayuda</a>
+                </li>
                 <li class="dropdown"><a href="#"><span><img src="images/user.png" class="ms-3 mx-auto">
                                 Negocio</span> <i class="bi bi-chevron-down"></i></a>
                     <ul>
@@ -55,6 +57,47 @@
 
     </div>
 </header><!-- End Header -->
+
+<div class="modal fade" id="ReportesNegocioAyudaModal" tabindex="-1" role="dialog" aria-labelledby="modalTitle"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="modalTitle3">Panel de Ayuda</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <h5>Reservas</h5>
+                    <p>En esta pantalla podrás visualizar y consultar filtrando de diferente manera los datos almacenados
+                    de tu cuenta, en base a las reservas y canchas de tu sistema. Encontrarás 4 reportes que te servirán de utilidad.</p>
+                    <hr>
+                    <p>El primer reporte te mostrará la cancha más reservada en el mes que elijas en el desplegable.
+                    Una vez seleccionado el mes deberás hacer click en el botón verde "Consultar".</p>
+                    <hr>
+                    <p>En el segundo reporte podrás consultar la cantidad de reservas realizadas entre fechas y el estado
+                        seleccionado. Las fechas deberás elegirlas en los calendarios a disposición y el estado
+                    desde el desplegable. Una vez seleccionado todo, deberás hacer click en el botón verde "Consultar".</p>
+                    <hr>
+                    <p>En el tercer reporte podrás consultar y visualizar un gráfico estadístico de la cantidad de reservas
+                        entre fechas elegidas. Se te brindan 2 calendarios para que puedas escoger las fechas, y luego deberás
+                    hacer click en el botón verde "Ver gráfico".</p>
+                    <hr>
+                    <p>En el cuarto reporte podrás visualizar un gráfico estadístico que te mostrará el monto total en cada fecha donde tengas reservas.
+                        De esta manera podrás llevar un cálculo y ver que día tuviste mayores ingresios. Tené en cuenta que
+                        se mostrarán solo los montos de reservas confirmadas.
+                    Para realizar la consulta deberás hacer doble click en el botón pequeño de color verde que se encuentra encima del gráfico.</p>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 <body>
 <div class="container">

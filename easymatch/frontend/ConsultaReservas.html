@@ -36,8 +36,8 @@
 
         <nav id="navbar" class="navbar">
             <ul>
-                <li><a class="nav-link scrollto" href="inicioReserva.html">Volver</a></li>
-                <li><a class="nav-link scrollto" href="administraPerfilJugador.html">Administrar</a></li>
+                <li><a class="nav-link scrollto" href="inicioReserva.html">Inicio</a></li>
+                <li><a class="nav-link scrollto" onclick="$('#HistorialReservasAyudaModal').modal();">Ayuda</a>
                 </li>
                 <li class="dropdown"><a href="#"><span><img src="images/user.png" class="ms-3 mx-auto">
                                 Jugador</span> <i class="bi bi-chevron-down"></i></a>
@@ -51,6 +51,41 @@
 
     </div>
 </header><!-- End Header -->
+
+<div class="modal fade" id="HistorialReservasAyudaModal" tabindex="-1" role="dialog" aria-labelledby="modalTitle"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="modalTitle">Panel de Ayuda</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <h5>Historial de Reservas</h5>
+                    <p>En esta pantalla podrás visualizar las reservas que hayas generado desde que comenzaste a utilizar nuestro servicio.
+                        Además podrás cancelar las reservas que aún se encuentran en estado "A confirmar".</p>
+                    <hr>
+                    <p>En el recuadro que se encuentra en la esquina superior derecha de las reservas, podrás filtrar y buscar a gusto
+                        alguna reserva en específico.</p>
+                    <hr>
+                    <p>Para cancelar alguna reserva deberás primero seleccionarla y luego hacer click en el botón de color rojo "Cancelar".
+                    Podrás ver que automáticamente se realizará la cancelación y para estar seguro podrás visualizarlo en el estado de la misma.</p>
+                    <hr>
+                    <p>Recordá que no se podrá continuar ninguna reserva en estado "A confirmar",
+                        con lo cual deberás iniciar una nueva reserva. </p>
+                    <hr>
+                    <p>Si deseas iniciar una nueva reserva, hace click en el botón "Inicio" que se encuentra debajo de las reservas.</p>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 <div class="container" style="margin-top: 20px;">
     <h1 class="mt-5 mb-5 text-center">Historial de reservas</h1>

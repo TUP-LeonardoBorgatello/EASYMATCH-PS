@@ -37,7 +37,9 @@
 
     <nav id="navbar" class="navbar">
       <ul>
-        <li><a class="nav-link scrollto" href="inicioReserva.html">Volver</a></li>
+        <li><a class="nav-link scrollto" href="inicioReserva.html">Inicio</a></li>
+        </li>
+        <li><a class="nav-link scrollto" onclick="$('#AdministrarJugadorAyudaModal').modal();">Ayuda</a>
         </li>
         <li class="dropdown"><a href="#"><span><img src="images/user.png" class="ms-3 mx-auto">
                                 Jugador</span> <i class="bi bi-chevron-down"></i></a>
@@ -51,6 +53,37 @@
 
   </div>
 </header><!-- End Header -->
+
+<div class="modal fade" id="AdministrarJugadorAyudaModal" tabindex="-1" role="dialog" aria-labelledby="modalTitle"
+     aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="modalTitle2">Panel de Ayuda</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <h5>Perfil</h5>
+          <p>En esta pantalla podrás visualizar los datos con los que te registraste y además podrás
+            administrarlos editandolos.</p>
+          <hr>
+          <p>Para realizar la edición de alguno de tus datos, deberás seleccionarte en el recuadro y luego hacer click en el
+            botón verde "Editar". Se te despliegará una ventana con los campos a modificar.
+          Una vez realizados los cambios, será necesario que los confirmes apretando el botón "Guardar".</p>
+          <hr>
+          <p>Recordá que en esta pantalla tendrás a disposición la posibilidad de darte de baja del sistema.
+          Y para ello será necesiario que te selecciones en el recuadro para luego hacer click en el botón rojo "Desactivar"</p>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 <div class="container" style="margin-top: 20px;">
   <h1 class="mt-5 mb-5 text-center">Administrá tus datos</h1>
