@@ -51,7 +51,7 @@ public class NegocioService implements iNegocioService {
                 negocioRepository.updateNegocioToTrue(negocio.getIdNegocio());
             }
         } else if (negocioRequestDTO.getNombre() == "" || negocioRequestDTO.getDomicilio() == ""
-                || negocioRequestDTO.getEmail() == "" || negocioRequestDTO.getCuil() <= 0) {
+                || negocioRequestDTO.getEmail() == "" || negocioRequestDTO.getContraseña() == "" || negocioRequestDTO.getCuil() <= 0) {
             throw new Exception("Valores nulos");
         } else {
             Ciudad ciudad = ciudadRepository.findById(negocioRequestDTO.getId_ciudad()).orElseThrow();

@@ -172,14 +172,10 @@ public class ReservaService {
         List<Reserva> reservas = reservaRepository.findReservaByJugador(j.getIdJugador());
         List<DetalleReservaConsultaResponseDTO> detalleReservaConsultaResponseDTOS = new ArrayList<>();
         for (Reserva r : reservas) {
-            //El siguiente if es para validar que la fecha sea antes que hoy, entonces cambia el estado de la reserva a Cancelada.
-            if (r.getFecha().isBefore(LocalDate.now())) {
-                reservaRepository.updateEstadoToCancelado(r.getIdReserva());
-            }
-            DetalleReservaConsultaResponseDTO deDTO = new DetalleReservaConsultaResponseDTO();
             List<DetalleReserva> detalleReservas = detalleReservaRepository.findDetalleByReservaId(r.getIdReserva());
             if (!detalleReservas.isEmpty()) {
                 for (DetalleReserva de : detalleReservas) {
+                    DetalleReservaConsultaResponseDTO deDTO = new DetalleReservaConsultaResponseDTO();
                     deDTO.setIdReserva(r.getIdReserva());
                     deDTO.setFechaHora(de.getFechaReserva() + " " + de.getHorarioInicial());
                     deDTO.setFechaReserva(r.getFecha().toString());

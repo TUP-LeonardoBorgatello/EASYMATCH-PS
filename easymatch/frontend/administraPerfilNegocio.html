@@ -69,12 +69,15 @@
                     <p>En esta pantalla podrás visualizar los datos con los que te registraste y además podrás
                         administrarlos editandolos.</p>
                     <hr>
-                    <p>Para realizar la edición de alguno de tus datos, deberás seleccionarte en el recuadro y luego hacer click en el
+                    <p>Para realizar la edición de alguno de tus datos, deberás seleccionarte en el recuadro y luego
+                        hacer click en el
                         botón verde "Editar". Se te despliegará una ventana con los campos a modificar.
-                        Una vez realizados los cambios, será necesario que los confirmes apretando el botón "Guardar".</p>
+                        Una vez realizados los cambios, será necesario que los confirmes apretando el botón
+                        "Guardar".</p>
                     <hr>
                     <p>Recordá que en esta pantalla tendrás a disposición la posibilidad de darte de baja del sistema.
-                        Y para ello será necesiario que te selecciones en el recuadro para luego hacer click en el botón rojo "Desactivar"</p>
+                        Y para ello será necesiario que te selecciones en el recuadro para luego hacer click en el botón
+                        rojo "Desactivar"</p>
                 </form>
             </div>
             <div class="modal-footer">
@@ -281,33 +284,38 @@
             $('#email').val(data.email);
         },
         save: function (data) {
-            $.ajax({
-                url: app.backend + '/negocio/update',
-                data: JSON.stringify(data),
-                method: 'PUT',
-                dataType: 'json',
-                contentType: "application/json; charset=utf-8",
-                success: function (result) {
-                    if (result.status === "success") {
-                        swal({
-                            title: "Negocio editado",
-                            text: "Negocio actualizado con éxito",
-                            icon: "success",
-                        })
-                            .then((willDelete) => {
-                                location.reload();
-                            });
+            if (data.contraseña === "" || data.cuil === "" || data.nombre === "" || data.domicilio === "" || data.email === "") {
+                swal("Advertencia", "Alguno de los campos está vacío.", "info");
+                return false;
+            } else {
+                $.ajax({
+                    url: app.backend + '/negocio/update',
+                    data: JSON.stringify(data),
+                    method: 'PUT',
+                    dataType: 'json',
+                    contentType: "application/json; charset=utf-8",
+                    success: function (result) {
+                        if (result.status === "success") {
+                            swal({
+                                title: "Negocio editado",
+                                text: "Negocio actualizado con éxito",
+                                icon: "success",
+                            })
+                                .then((willDelete) => {
+                                    location.reload();
+                                });
+                        }
+                    },
+                    error: function (e) {
+                        if (data.id_ciudad === "SELECCIONE") {
+                            swal("Advertencia", "Seleccione una ciudad", "info");
+                            return false;
+                        } else {
+                            swal("Error", "No se encontró el negocio con ese cuil o los valores ingresados no corresponden", "warning");
+                        }
                     }
-                },
-                error: function (e) {
-                    if (data.id_ciudad === "SELECCIONE") {
-                        swal("Advertencia", "Seleccione una ciudad", "info");
-                        return false;
-                    } else {
-                        swal("Error", "No se encontró el negocio con ese cuil o los valores ingresados no corresponden", "warning");
-                    }
-                }
-            })
+                })
+            }
         },
         save2: function (data) {
             $.ajax({

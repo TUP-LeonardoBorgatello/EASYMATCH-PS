@@ -71,15 +71,14 @@
             <div class="modal-body">
                 <form>
                     <h5>Reservas</h5>
-                    <p>En esta pantalla podrás visualizar y consultar filtrando de diferente manera los datos almacenados
-                    de tu cuenta, en base a las reservas y canchas de tu sistema. Encontrarás 4 reportes que te servirán de utilidad.</p>
+                    <p>En el primer reporte podrás consultar y visualizar un gráfico estadístico de la cantidad de reservas
+                        entre fechas elegidas. Se te brindan 2 calendarios para que puedas escoger las fechas, y luego deberás
+                    hacer click en el botón verde "Ver gráfico".</p>
                     <hr>
-                    <p>El primer reporte te mostrará la cancha más reservada en el mes que elijas en el desplegable.
-                    Una vez seleccionado el mes deberás hacer click en el botón verde "Consultar".</p>
-                    <hr>
-                    <p>En el segundo reporte podrás consultar la cantidad de reservas realizadas entre fechas y el estado
-                        seleccionado. Las fechas deberás elegirlas en los calendarios a disposición y el estado
-                    desde el desplegable. Una vez seleccionado todo, deberás hacer click en el botón verde "Consultar".</p>
+                    <p>En el segundo reporte podrás visualizar un gráfico estadístico que te mostrará el monto total en cada fecha donde tengas reservas.
+                        De esta manera podrás llevar un cálculo y ver que día tuviste mayores ingresios. Tené en cuenta que
+                        se mostrarán solo los montos de reservas confirmadas.
+                    Para realizar la consulta deberás hacer doble click en el botón pequeño de color verde que se encuentra encima del gráfico.</p>
                 </form>
             </div>
             <div class="modal-footer">
@@ -92,107 +91,38 @@
 
 <body>
 <div class="container">
-    <h1 class="mt-5 mb-5 text-center">Reportes</h1>
+    <h1 class="mt-5 mb-5 text-center">Reportes gráficos</h1>
     <main style="width: 80%">
         <section style="padding-top: 5px">
-            <h4>En la siguiente tabla podrá verificar la cancha más reservada del año en curso:</h4>
-            <br>
-            <h5>Seleccione el mes que desee:</h5>
-
-            <select class="form-control" name="cboMes" id="cboMes" style="width: 20%;">
-                <option>Seleccione</option>
-                <option value="1">Enero</option>
-                <option value="2">Febrero</option>
-                <option value="3">Marzo</option>
-                <option value="4">Abril</option>
-                <option value="5">Mayo</option>
-                <option value="6">Junio</option>
-                <option value="7">Julio</option>
-                <option value="8">Agosto</option>
-                <option value="9">Septiembre</option>
-                <option value="10">Octubre</option>
-                <option value="11">Noviembre</option>
-                <option value="12">Diciembre</option>
-            </select>
-            <br>
-            <div class="container mt-6 border">
-                <br>
-                <div class="row">
-                    <div class="col-3">
-                        <img src="images/EASY-MATCH2.png" class="ms-3"
-                             style="width: 15%"><span class="h5">Reporte 1</span>
-                    </div>
-                    <hr>
-                    <table class="table  text-center mb-4">
-                        <thead>
-                        <tr>
-                            <th scope="col">Cancha más reservada</th>
-                            <th scope="col">Cantidad de veces reservada en el mes</th>
-                            <th scope="col">Número de cancha</th>
-                        </tr>
-                        </thead>
-                        <tbody id="reporte1">
-
-
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-            <div class="col-xl-12 mt-4 botones">
-                <button type="button" id="consultar"
-                        class="reporteButtons">Consultar
-                </button>
-            </div>
-            <section>
-                <hr>
-                <h4>En la siguiente tabla podrás consultar la cantidad de reservas realizadas entre fechas y el estado
-                    elegido:</h4>
-                <br>
-                <h5>Estado:</h5>
-
-                <select class="form-control" name="cboMes" id="cboEstado" style="width: 14%;">
-                    <option>Seleccione</option>
-                    <option value="1">Facturadas</option>
-                    <option value="2">Abandonadas</option>
-                    <option value="3">Canceladas</option>
-                </select>
-                <br>
-                <h5>Fechas:</h5>
-                <div class="row" style="width: 60%">
-                    <div class="col-6">
-                        Desde: <input type="date" class="form-control" id="fechaInicio" style="width: 50%;">
-                    </div>
-                    <div class="col-6">
-                        Hasta: <input type="date" class="form-control" id="fechaFin" style="width: 50%;">
-                    </div>
-                </div>
-                <br>
-                <div class="container mt-6 border">
-                    <br>
+            <h4>Gráfico de cantidad de reservas entre fechas:</h4>
+            <section class="col-xl-8 col-md-4 col-sm-4">
+                <figure style="width: 60%">
+                    <h5 class="text-center" for="nombre">Reservas por Fechas </h5>
                     <div class="row">
-                        <div class="col-3">
-                            <img src="images/EASY-MATCH2.png" class="ms-3"
-                                 style="width: 15%"><span class="h5">Reporte 2</span>
+                        <div class="col-6">
+                            <input type="date" class="form-control" id="fechaInicio2">
                         </div>
-
-                        <table class="table  text-center mb-4">
-                            <thead>
-                            <tr>
-                                <th scope="col">Cantidad de reservas</th>
-                            </tr>
-                            </thead>
-                            <tbody id="reporte2">
-
-
-                            </tbody>
-                        </table>
+                        <div class="col-6">
+                            <input type="date" class="form-control" id="fechaFin2">
+                        </div>
+                        <div class="col-xl-12 mt-4 botones">
+                            <button type="button" id="consultar3"
+                                    class="reporte3Buttons" onclick="reporteFecha();">Ver Gráfico
+                            </button>
+                        </div>
                     </div>
-                </div>
-                <div class="col-xl-12 mt-4 botones">
-                    <button type="button" id="consultar2"
-                            class="reporteButtons">Consultar
-                    </button>
-                </div>
+                    <canvas id="reporte3"></canvas>
+                </figure>
+            </section>
+            <hr>
+            <h4>Gráfico de monto por fechas de reservas facturadas en el transcurso del año:</h4>
+            <section>
+                <figure>
+                    <h5 class="text-center" for="nombre"></h5>
+                    <canvas id="reporte4"></canvas>
+                    <br>
+                    <br>
+                </figure>
             </section>
         </section>
     </main>

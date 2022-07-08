@@ -72,7 +72,7 @@ public class JugadorService implements iJugadorService {
                 jugadorRepository.updateEstadoToTrue(jugador.getIdJugador());
             }
         } else if (jugadorRequestDTO.getNombre().equals("") || jugadorRequestDTO.getApellido().equals("") || jugadorRequestDTO.getDomicilio().equals("")
-                || jugadorRequestDTO.getEmail().equals("") || jugadorRequestDTO.getDocumento() <= 0) {
+                || jugadorRequestDTO.getEmail().equals("") || jugadorRequestDTO.getContraseña().equals("") || jugadorRequestDTO.getDocumento() <= 0) {
             throw new Exception("Valores nulos");
         } else {
             Ciudad ciudad = ciudadRepository.findById(jugadorRequestDTO.getId_ciudad()).orElseThrow();
@@ -152,6 +152,7 @@ public class JugadorService implements iJugadorService {
                     TipoDoc tipoDoc = tipoDocRepository.findById(jugadorRequestDTO.getId_tipo_doc()).orElseThrow();
                     jugador.setTipoDoc(tipoDoc);
                     jugador.setDomicilio(jugadorRequestDTO.getDomicilio());
+                    jugador.setContraseña(jugadorRequestDTO.getContraseña());
                     jugadorRepository.save(jugador);
                 }
             } catch (Exception e) {
